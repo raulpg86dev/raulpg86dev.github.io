@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DB2 SQLCODEs — Referencia Completa</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0d11;--bg2:#111318;--bg3:#181b22;--bg4:#1e2230;--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);--text:#dde2ed;--text2:#7f8a9e;--text3:#3e4557;--accent:#3b82f6;--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif;--radius:10px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;line-height:1.6;}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh;}
+header{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 2rem;position:sticky;top:0;z-index:100;}
+.header-inner{max-width:1300px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.brand-icon{width:32px;height:32px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:600;color:white;flex-shrink:0;}
+.brand-name{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--text);}
+.brand-name span{color:var(--accent);}
+.header-stats{font-family:var(--mono);font-size:11px;color:var(--text3);}
+.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:2.5rem 2rem;}
+.hero-inner{max-width:1300px;margin:0 auto;}
+h1{font-family:var(--mono);font-size:clamp(22px,4vw,36px);font-weight:600;letter-spacing:-0.03em;margin-bottom:6px;}
+h1 em{font-style:normal;color:var(--accent);}
+.hero-sub{font-size:15px;color:var(--text2);max-width:600px;margin-bottom:1.5rem;}
+.search-wrap{position:relative;max-width:520px;}
+.search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none;}
+#search{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:11px 14px 11px 42px;font-family:var(--mono);font-size:13px;color:var(--text);outline:none;transition:border-color 0.2s;}
+#search::placeholder{color:var(--text3);}
+#search:focus{border-color:var(--accent);}
+.main{display:flex;flex:1;max-width:1300px;margin:0 auto;width:100%;padding:0 2rem;gap:2rem;}
+aside{width:200px;flex-shrink:0;padding:1.5rem 0;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;}
+aside::-webkit-scrollbar{width:3px;}
+aside::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.aside-section{margin-bottom:1.5rem;}
+.aside-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text3);margin-bottom:8px;padding-left:4px;}
+.aside-btn{display:flex;align-items:center;gap:8px;width:100%;padding:6px 10px;border:none;background:transparent;color:var(--text2);font-family:var(--sans);font-size:13px;cursor:pointer;border-radius:6px;transition:background 0.15s,color 0.15s;text-align:left;}
+.aside-btn:hover{background:var(--bg3);color:var(--text);}
+.aside-btn.active{background:var(--bg4);color:var(--text);}
+.aside-btn .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.aside-count{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--text3);}
+.content{flex:1;padding:1.5rem 0 4rem;min-width:0;}
+.section-header{display:flex;align-items:baseline;gap:10px;margin-bottom:1rem;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.section-title{font-family:var(--mono);font-size:13px;font-weight:600;}
+.section-count{font-family:var(--mono);font-size:11px;color:var(--text3);}
+.group{margin-bottom:2.5rem;}
+.tbl-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead tr{background:var(--bg3);border-bottom:1px solid var(--border2);}
+thead th{padding:10px 14px;text-align:left;font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);white-space:nowrap;}
+tbody tr{border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.12s;}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:hover{background:var(--bg3);}
+td{padding:12px 14px;vertical-align:top;}
+.td-code{font-family:var(--mono);font-size:12px;font-weight:600;white-space:nowrap;}
+.td-name{font-weight:500;color:var(--text);min-width:160px;}
+.td-desc{color:var(--text2);line-height:1.5;max-width:380px;}
+.td-action{text-align:right;white-space:nowrap;}
+.td-action span{font-family:var(--mono);font-size:11px;color:var(--text3);transition:color 0.15s;}
+tbody tr:hover .td-action span{color:var(--accent);}
+.sev{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:4px;font-weight:600;white-space:nowrap;}
+.sev-ok{background:rgba(34,197,94,0.12);color:#4ade80;}
+.sev-warn{background:rgba(245,158,11,0.12);color:#fbbf24;}
+.sev-error{background:rgba(239,68,68,0.12);color:#fca5a5;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:300;align-items:center;justify-content:center;padding:1.5rem;}
+.overlay.open{display:flex;animation:fadeIn 0.18s ease;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;width:100%;max-width:660px;max-height:88vh;overflow-y:auto;animation:slideUp 0.22s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px) scale(0.96);}to{opacity:1;transform:translateY(0) scale(1);}}
+.modal::-webkit-scrollbar{width:4px;}
+.modal::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.modal-top{padding:20px 22px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;position:sticky;top:0;background:var(--bg2);z-index:1;}
+.modal-code-line{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.modal-code{font-family:var(--mono);font-size:22px;font-weight:600;letter-spacing:-0.02em;}
+.modal-name{font-size:15px;color:var(--text2);}
+.close-btn{background:var(--bg3);border:1px solid var(--border);border-radius:7px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2);font-size:13px;flex-shrink:0;transition:all 0.15s;}
+.close-btn:hover{background:var(--border);color:var(--text);}
+.modal-body{padding:20px 22px;}
+.m-section{margin-bottom:20px;}
+.m-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text3);margin-bottom:8px;}
+.m-text{font-size:14px;color:var(--text2);line-height:1.7;}
+.m-list{list-style:none;}
+.m-list li{display:flex;gap:10px;font-size:14px;color:var(--text2);line-height:1.5;margin-bottom:6px;}
+.m-list li::before{content:"\25B8";color:var(--text3);flex-shrink:0;}
+.code-block{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:12px;color:#a8b8cc;line-height:1.8;white-space:pre;overflow-x:auto;}
+.m-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.m-chip{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;}
+.m-chip-label{font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;}
+.m-chip-value{font-size:13px;font-weight:500;color:var(--text);}
+.no-results{text-align:center;padding:5rem 2rem;color:var(--text3);font-family:var(--mono);font-size:13px;display:none;}
+footer{border-top:1px solid var(--border);padding:1.2rem 2rem;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text3);position:relative;z-index:1;}
+@media(max-width:768px){.main{flex-direction:column;padding:0 1rem;gap:0;}aside{width:100%;position:static;height:auto;padding:1rem 0 0;overflow:visible;}.aside-btn{display:inline-flex;width:auto;}.aside-section{display:flex;gap:6px;flex-wrap:wrap;}.aside-label{display:none;}header,.hero{padding-left:1rem;padding-right:1rem;}}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <div class="header-inner">
+    <a class="brand" href="#"><div class="brand-icon">DB2</div><div class="brand-name"><span>DB2</span>Codes</div></a>
+    <div class="header-stats" id="header-stats">Cargando...</div>
+  </div>
+</header>
+<div class="hero">
+  <div class="hero-inner">
+    <h1>DB2 <em>SQLCODEs</em> — Referencia Completa</h1>
+    <p class="hero-sub">Más de 150 SQLCODEs DB2 documentados en producción: descripción, causas, solución y ejemplo SQL/COBOL para cada código.</p>
+    <div class="search-wrap">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Buscar código, nombre o descripción..." oninput="applyFilters()" autocomplete="off" spellcheck="false"/>
+    </div>
+  </div>
+</div>
+<div class="main">
+  <aside>
+    <div class="aside-section">
+      <div class="aside-label">Severidad</div>
+      <button class="aside-btn active" onclick="setFilter('all',this)"><span>Todos</span><span class="aside-count" id="cnt-all"></span></button>
+      <button class="aside-btn" onclick="setFilter('success',this)"><span class="dot" style="background:#22c55e"></span>Éxito<span class="aside-count" id="cnt-success"></span></button>
+      <button class="aside-btn" onclick="setFilter('warning',this)"><span class="dot" style="background:#f59e0b"></span>Aviso<span class="aside-count" id="cnt-warning"></span></button>
+      <button class="aside-btn" onclick="setFilter('error',this)"><span class="dot" style="background:#ef4444"></span>Error<span class="aside-count" id="cnt-error"></span></button>
+    </div>
+    <div class="aside-section" style="margin-top:1.5rem">
+      <div class="aside-label">Categoría</div>
+      <button class="aside-btn" onclick="setFilter('system',this)"><span class="dot" style="background:#94a3b8"></span>Sistema<span class="aside-count" id="cnt-system"></span></button>
+      <button class="aside-btn" onclick="setFilter('syntax',this)"><span class="dot" style="background:#3b82f6"></span>Sintaxis<span class="aside-count" id="cnt-syntax"></span></button>
+      <button class="aside-btn" onclick="setFilter('data',this)"><span class="dot" style="background:#f472b6"></span>Datos<span class="aside-count" id="cnt-data"></span></button>
+      <button class="aside-btn" onclick="setFilter('cursor',this)"><span class="dot" style="background:#2dd4bf"></span>Cursor<span class="aside-count" id="cnt-cursor"></span></button>
+      <button class="aside-btn" onclick="setFilter('integrity',this)"><span class="dot" style="background:#f97316"></span>Integridad<span class="aside-count" id="cnt-integrity"></span></button>
+      <button class="aside-btn" onclick="setFilter('auth',this)"><span class="dot" style="background:#a78bfa"></span>Autorización<span class="aside-count" id="cnt-auth"></span></button>
+      <button class="aside-btn" onclick="setFilter('object',this)"><span class="dot" style="background:#fb923c"></span>Objetos<span class="aside-count" id="cnt-object"></span></button>
+    </div>
+  </aside>
+  <div class="content">
+    <div id="results-area"></div>
+    <div class="no-results" id="no-results">No se encontraron códigos para esa búsqueda.</div>
+  </div>
+</div>
+<footer>DB2 SQLCODEs — Referencia Completa de Producción</footer>
+</div>
+<div class="overlay" id="overlay" onclick="closeOverlay(event)">
+  <div class="modal">
+    <div class="modal-top">
+      <div>
+        <div class="modal-code-line"><div class="modal-code" id="m-code"></div><span class="sev" id="m-sev"></span></div>
+        <div class="modal-name" id="m-name"></div>
+      </div>
+      <button class="close-btn" onclick="closeModal()">&#x2715;</button>
+    </div>
+    <div class="modal-body">
+      <div class="m-grid">
+        <div class="m-chip"><div class="m-chip-label">Severidad</div><div class="m-chip-value" id="m-type"></div></div>
+        <div class="m-chip"><div class="m-chip-label">Categoría</div><div class="m-chip-value" id="m-cat"></div></div>
+      </div>
+      <div class="m-section"><div class="m-label">Descripción</div><div class="m-text" id="m-desc"></div></div>
+      <div class="m-section"><div class="m-label">Causas comunes</div><ul class="m-list" id="m-causes"></ul></div>
+      <div class="m-section"><div class="m-label">Cómo solucionarlo</div><ul class="m-list" id="m-solutions"></ul></div>
+      <div class="m-section"><div class="m-label">Ejemplo / diagnóstico</div><div class="code-block" id="m-example"></div></div>
+    </div>
+  </div>
+</div>
+<script>
+const CODES = [
+  {code:'SQLCODE 0',name:'Ejecución exitosa',severity:'success',cat:'system',desc:'La sentencia SQL se ejecutó correctamente sin errores.',causes:["Comportamiento normal y esperado","La consulta procesó los datos correctamente"],solutions:["No se requiere ninguna acción","Verificar filas afectadas con GET DIAGNOSTICS si es necesario"],example:`GET DIAGNOSTICS :WS-COUNT = ROW_COUNT;
+-- SQLCODE = 0 confirma éxito`},
+  {code:'SQLCODE +100',name:'Sin datos / Fin de cursor',severity:'warning',cat:'cursor',desc:'No se encontró fila en SELECT INTO o FETCH. En cursores indica fin del resultado. También al hacer UPDATE de fila inexistente.',causes:["WHERE no coincide con ningún registro","El cursor procesó todas las filas","UPDATE/DELETE sobre fila inexistente"],solutions:["Usar +100 como señal de fin en FETCH","Manejar el caso 'sin datos' en la lógica"],example:`PERFORM UNTIL SQLCODE = 100
+  EXEC SQL FETCH C1 INTO :WS-ID, :WS-NOM END-EXEC
+  IF SQLCODE = 0
+    PERFORM PROCESS-ROW
+  END-IF
+END-PERFORM.`},
+  {code:'SQLCODE -001',name:'UPDATE sobre fila inexistente',severity:'error',cat:'data',desc:'Se intentó hacer UPDATE pero la fila no existe en la tabla.',causes:["La clave WHERE no identifica ninguna fila","La fila fue eliminada por otro proceso","Valor de clave incorrecto"],solutions:["Verificar existencia con SELECT antes de UPDATE","Controlar el caso de 0 filas actualizadas"],example:`SELECT COUNT(*) INTO :WS-CNT
+FROM empleados WHERE id = :WS-ID;
+IF WS-CNT > 0
+  UPDATE empleados SET salario = :WS-SAL WHERE id = :WS-ID
+END-IF.`},
+  {code:'SQLCODE -004',name:'Campo demasiado largo / tipo incompatible',severity:'error',cat:'data',desc:'Campo del CURSOR demasiado largo para la variable receptora, o se mueve alfanumérico a COMP en la WHERE. COPY no coincide con CREATE.',causes:["Variable host más corta que la columna DB2","Mover alfanumérico a COMP en la WHERE","Abrir CURSOR con valores alfanuméricos en campos numéricos","COPY no coincide con CREATE TABLE"],solutions:["Ampliar la variable host al menos a la longitud de la columna","Usar tipo correcto (COMP-3 para decimales)","Verificar que la COPY coincide con el CREATE"],example:`* Variable correcta para DECIMAL(9,2)
+01 WS-IMPORTE  PIC S9(7)V9(2) COMP-3.
+
+* INCORRECTO: alfanumérico en campo numérico
+* MOVE 'ABC' TO WS-IMPORTE  => -004`},
+  {code:'SQLCODE -007',name:'Carácter ilegal en instrucción SQL',severity:'error',cat:'syntax',desc:'La sentencia SQL contiene un carácter no válido que el parser de DB2 no puede interpretar.',causes:["Caracteres especiales o de control en la sentencia","Codificación EBCDIC/ASCII incorrecta","Caracteres invisibles copiados de otro editor"],solutions:["Revisar la sentencia caracter a caracter","Verificar la codificación del fichero fuente","Reescribir la sentencia SQL desde cero"],example:`SELECT nombre, apellido
+FROM empleados WHERE dept = 'TI';
+-- Evitar: ñ, ¿, ¡ en nombres de columna
+-- Usar solo: A-Z, 0-9, guión bajo`},
+  {code:'SQLCODE -009',name:'Nombre de campo o tabla erróneo',severity:'error',cat:'syntax',desc:'Nombre de campo erróneo en SET de UPDATE, en SELECT del CURSOR, o nombre de tabla erróneo en FROM del DECLARE.',causes:["Typo en nombre de columna en SET de UPDATE","Nombre de columna mal escrito en SELECT del CURSOR","Nombre de tabla incorrecto en FROM del DECLARE"],solutions:["Verificar nombre con SYSCAT.COLUMNS","Verificar nombre de tablas con SYSCAT.TABLES","Revisar el DECLARE comparando con el esquema real"],example:`SELECT COLNAME FROM SYSCAT.COLUMNS
+WHERE TABNAME = 'EMPLEADOS' ORDER BY COLNO;`},
+  {code:'SQLCODE -010',name:'Carácter ilegal / falta de memoria',severity:'error',cat:'syntax',desc:'Carácter ilegal en instrucción SQL, o falta de memoria en entorno PC/MICROFOCUS.',causes:["Carácter no válido en la sentencia SQL","Falta de memoria en el entorno de ejecución","Sentencia SQL demasiado compleja"],solutions:["Revisar la sentencia SQL buscando caracteres inválidos","Aumentar REGION en el JCL (ej: REGION=4M)","Simplificar la sentencia SQL"],example:`//PASO1 EXEC PGM=MI_PGM,REGION=4M
+
+-- Simplificar la sentencia compleja
+-- usando tabla temporal intermedia`},
+  {code:'SQLCODE -011',name:'VARCHAR: referencia incorrecta al nivel 49',severity:'error',cat:'syntax',desc:'Usando VARCHAR en el CURSOR se hace referencia al nivel 49 en lugar del nombre del grupo.',causes:["Se referencia el campo nivel 49 en lugar del grupo VARCHAR","Confusión entre nombre del grupo y sus subcampos nivel 49"],solutions:["En FETCH usar el nombre del grupo, no el nivel 49","Revisar la estructura COBOL de variables VARCHAR"],example:`01 WS-COMENTARIO.
+   49 WS-COM-LEN   PIC S9(4) COMP.
+   49 WS-COM-DATA  PIC X(200).
+
+* CORRECTO: usar el nombre del grupo
+EXEC SQL FETCH C1 INTO :WS-COMENTARIO END-EXEC.`},
+  {code:'SQLCODE -012',name:'Número de campos en FETCH distinto al DECLARE',severity:'error',cat:'cursor',desc:'El número de campos en el FETCH no coincide con los de la SELECT del CURSOR.',causes:["FETCH con más o menos variables que columnas en SELECT","Columna añadida al SELECT sin añadir variable en FETCH","COPY no actualizada tras cambio en el DECLARE"],solutions:["Alinear exactamente columnas del SELECT con variables del FETCH","Revisar DECLARE y FETCH juntos"],example:`* Mismo número de campos en SELECT y FETCH
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, nombre, salario  -- 3 columnas
+FROM empleados END-EXEC.
+
+EXEC SQL FETCH C1
+  INTO :WS-ID, :WS-NOMBRE, :WS-SALARIO
+END-EXEC.`},
+  {code:'SQLCODE -016',name:'CURSOR ya abierto / CURSOR cerrado en operación',severity:'error',cat:'cursor',desc:'OPEN sobre CURSOR ya abierto, o UPDATE/FETCH/CLOSE sobre CURSOR que no está abierto.',causes:["OPEN sobre CURSOR ya abierto sin CLOSE previo","UPDATE con CURSOR cerrado","FETCH o CLOSE sobre CURSOR no abierto"],solutions:["Añadir lógica para rastrear estado del CURSOR (abierto/cerrado)","Siempre hacer CLOSE antes de nuevo OPEN","Verificar flujo: OPEN → FETCH → CLOSE"],example:`01 WS-CUR-EST  PIC X VALUE 'C'.
+
+IF WS-CUR-EST = 'A'
+  EXEC SQL CLOSE C1 END-EXEC
+  MOVE 'C' TO WS-CUR-EST
+END-IF.
+EXEC SQL OPEN C1 END-EXEC.
+MOVE 'A' TO WS-CUR-EST.`},
+  {code:'SQLCODE -018',name:'Inserción con claves duplicadas',severity:'error',cat:'integrity',desc:'INSERT con valor de clave ya existente cuando hay índices únicos o PRIMARY KEY.',causes:["INSERT con valor de clave ya existente","Carga masiva con registros duplicados","Proceso concurrente que insertó el mismo registro"],solutions:["Verificar existencia con SELECT antes del INSERT","Usar MERGE para UPSERT","Capturar -803 y gestionar el duplicado"],example:`SELECT COUNT(*) INTO :WS-CNT
+FROM clientes WHERE id = :WS-ID;
+IF WS-CNT = 0
+  INSERT INTO clientes VALUES (:WS-ID, :WS-NOM)
+ELSE
+  PERFORM DUPLICADO-HANDLER
+END-IF.`},
+  {code:'SQLCODE -019',name:'Instrucción SQL demasiado larga o compleja',severity:'error',cat:'syntax',desc:'La sentencia SQL supera el límite de longitud o complejidad, o hay error de sintaxis en el DECLARE del CURSOR.',causes:["Sentencia SQL que supera 32KB","Demasiados predicados encadenados","Sintaxis incorrecta en el DECLARE del CURSOR","Mala instalación de DB2"],solutions:["Dividir la sentencia usando tablas temporales","Simplificar los predicados WHERE","Revisar la sintaxis del DECLARE caracter a caracter"],example:`CREATE GLOBAL TEMPORARY TABLE tmp1 AS (
+  SELECT id, nombre FROM empleados
+  WHERE dept IN ('TI','RRHH')
+) WITH DATA;
+SELECT t.*, d.desc
+FROM tmp1 t JOIN departamentos d ON t.dept=d.id;`},
+  {code:'SQLCODE -020',name:'Programa mal compilado / error en DECLARE o UPDATE',severity:'error',cat:'syntax',desc:"Error por parámetros CDIC/ASCII incorrectos, falta comas en SET o DECLARE, falta 'OF' en UPDATE de cursor, o campos particionados en WORKING.",causes:["Compilado con parámetros CDIC/ASCII incorrectos","Falta comas en SET de UPDATE o en DECLARE","Falta 'WHERE CURRENT OF cursor' en UPDATE","Campos particionados en WORKING-STORAGE"],solutions:["Verificar parámetro de compilación en directorio COBOLMF","Revisar todas las comas del DECLARE y del SET","Usar 'UPDATE ... WHERE CURRENT OF cursor'"],example:`* CORRECTO: UPDATE con cursor posicionado
+EXEC SQL
+  UPDATE empleados
+  SET salario = :WS-SALARIO,
+      categoria = :WS-CAT
+  WHERE CURRENT OF C1
+END-EXEC.`},
+  {code:'SQLCODE -024',name:'CURSOR sobre tabla no creada',severity:'error',cat:'object',desc:'Se intenta declarar o abrir un CURSOR sobre una tabla que no existe en la base de datos.',causes:["Tabla referenciada en DECLARE CURSOR no existe","Nombre de tabla con typo","Script de creación de tablas no ejecutado"],solutions:["Verificar existencia con SYSCAT.TABLES","Crear la tabla antes de referenciarla","Usar nombre cualificado esquema.tabla"],example:`SELECT COUNT(*) INTO :WS-EXISTE
+FROM SYSCAT.TABLES
+WHERE TABNAME='MI_TABLA'
+  AND TABSCHEMA='MI_SCHEMA';
+IF WS-EXISTE = 0
+  PERFORM TABLA-NO-EXISTE
+END-IF.`},
+  {code:'SQLCODE -034',name:"Variable acumuladora mal definida / falta ':' en COMP",severity:'error',cat:'data',desc:"Variable para acumular en SELECT COUNT debe ser PIC S9(15) COMP-3. Faltan ':' delante de variables COMP en la WHERE.",causes:["Variable de acumulación con tipo incorrecto","Falta ':' delante de variables host en WHERE","Precisión insuficiente en la variable acumuladora"],solutions:["Definir variable acumuladora como PIC S9(15) COMP-3","Añadir ':' delante de TODAS las variables host en SQL"],example:`01 WS-CONTADOR   PIC S9(15) COMP-3.
+01 WS-TOTAL      PIC S9(13)V9(2) COMP-3.
+
+EXEC SQL
+  SELECT COUNT(*), SUM(salario)
+  INTO :WS-CONTADOR, :WS-TOTAL
+  FROM empleados
+  WHERE dept = :WS-DEPT
+END-EXEC.`},
+  {code:'SQLCODE -040',name:'Inserción con claves duplicadas (índices)',severity:'error',cat:'integrity',desc:'Inserción con claves duplicadas cuando se han creado índices únicos.',causes:["INSERT con valor ya existente en columna con índice UNIQUE","Proceso de carga masiva con datos duplicados","Fallo en la lógica de deduplicación"],solutions:["Identificar duplicados con GROUP BY ... HAVING COUNT(*) > 1","Usar MERGE para manejar inserción o actualización","Capturar el error y gestionar el duplicado"],example:`SELECT clave, COUNT(*) cnt
+FROM datos_a_cargar
+GROUP BY clave HAVING COUNT(*) > 1;`},
+  {code:'SQLCODE -046',name:'Demasiados campos en creación de índice',severity:'error',cat:'object',desc:'El número de columnas en la creación de un índice supera el máximo permitido.',causes:["CREATE INDEX con más columnas de las permitidas","Índice compuesto demasiado complejo"],solutions:["Reducir el número de columnas a las estrictamente necesarias","Dividir en varios índices más simples"],example:`-- Índice con columnas mínimas necesarias
+CREATE INDEX IDX_EMP_DEPT
+  ON empleados (dept_id, fecha_alta)
+  INCLUDE (nombre);`},
+  {code:'SQLCODE -047',name:'Nombre de objeto demasiado largo',severity:'error',cat:'object',desc:'El nombre de tabla, vista, índice o sinónimo supera el máximo (18 chars en versiones antiguas, 128 en LUW moderno).',causes:["Nombre de tabla/índice con más de 18 caracteres (versiones antiguas)","Nombre que excede el límite de la versión de DB2"],solutions:["Usar nombres dentro del límite permitido","Verificar el límite de la versión de DB2 en uso"],example:`-- DB2 z/OS antiguo: máximo 18 chars
+-- DB2 LUW moderno: máximo 128 chars
+SELECT TABNAME, LENGTH(TABNAME)
+FROM SYSCAT.TABLES
+WHERE TABSCHEMA='MI_SCHEMA'
+ORDER BY 2 DESC;`},
+  {code:'SQLCODE -050',name:'Suma de longitudes de clave de índice excede el límite',severity:'error',cat:'object',desc:'El índice no puede crearse porque la suma de longitudes de campos supera el máximo (255 bytes en z/OS).',causes:["Columnas cuya suma supera 255 bytes (z/OS) o 1024 (LUW)","Columnas VARCHAR largas en el índice","Demasiadas columnas de texto en la clave"],solutions:["Reducir número o longitud de columnas en el índice","Usar columnas más cortas para las claves"],example:`-- Ver longitud total de columnas del índice
+SELECT SUM(LENGTH) AS TOTAL_BYTES
+FROM SYSCAT.COLUMNS
+WHERE TABNAME='MI_TABLA'
+  AND COLNAME IN ('COL1','COL2','COL3');`},
+  {code:'SQLCODE -051',name:'No se puede crear índice único con valores duplicados',severity:'error',cat:'integrity',desc:'No se puede crear índice único porque ya existen filas con valores duplicados.',causes:["Datos con valores repetidos en la columna a indexar","Importación de datos sin validación de unicidad"],solutions:["Identificar duplicados con GROUP BY ... HAVING COUNT(*) > 1","Eliminar duplicados antes de crear el índice"],example:`SELECT email, COUNT(*)
+FROM empleados
+GROUP BY email HAVING COUNT(*) > 1;
+
+DELETE FROM empleados
+WHERE id NOT IN (
+  SELECT MIN(id) FROM empleados GROUP BY email
+);
+CREATE UNIQUE INDEX IDX_EMP_EMAIL ON empleados(email);`},
+  {code:'SQLCODE -053',name:'Error en datos: COPY no coincide con CREATE',severity:'error',cat:'data',desc:'Error en los datos porque la COPY no concuerda con la tabla del CREATE TABLE.',causes:["COPY desactualizada respecto al CREATE TABLE","Columnas modificadas sin regenerar la COPY","Diferencia en longitud o tipo entre COPY y tabla"],solutions:["Regenerar la COPY con DCLGEN desde la definición actual","Comparar campo a campo la COPY con el esquema"],example:`/* Usar DCLGEN para generar COPY actualizada */
+DCLGEN TABLE(MI_SCHEMA.EMPLEADOS)
+        LIBRARY(MI_LIB(EMPLEADOS))
+        ACTION(REPLACE)
+        LANGUAGE(COBOL)
+        STRUCTURE(WS-EMPLEADOS)`},
+  {code:'SQLCODE -057',name:'INSERT con distinto número de campos que la COPY',severity:'error',cat:'data',desc:'Al hacer un INSERT, la COPY y el SQL no tienen el mismo número de campos.',causes:["INSERT que omite columnas de la tabla","COPY con menos campos que el INSERT","Columnas añadidas sin actualizar el INSERT"],solutions:["Listar explícitamente todas las columnas en el INSERT","Actualizar la COPY para que refleje la estructura actual"],example:`-- Especificar siempre columnas explícitamente
+INSERT INTO empleados
+  (id, nombre, apellido, dept_id, salario)
+VALUES
+  (:WS-ID,:WS-NOM,:WS-APE,:WS-DEPT,:WS-SAL);`},
+  {code:'SQLCODE -059',name:'CREATE y COPY no están al mismo nivel',severity:'error',cat:'data',desc:'El CREATE TABLE y la COPY de COBOL no están sincronizados.',causes:["COPY generada con versión anterior del CREATE TABLE","Modificaciones en el CREATE sin regenerar la COPY"],solutions:["Regenerar la COPY con DCLGEN","Establecer proceso de build que incluya regenerar COPY tras DDL"],example:`/* Proceso de sincronización */
+/* 1. Modificar CREATE TABLE  */
+/* 2. Ejecutar DCLGEN         */
+/* 3. Recompilar el programa  */
+/* 4. Hacer BIND              */`},
+  {code:'SQLCODE -061',name:'Demasiados campos para una tabla',severity:'error',cat:'object',desc:'El número de columnas del CREATE TABLE supera el límite (750 en z/OS, 1012 en LUW).',causes:["Tabla con excesivas columnas","Migración de sistemas legacy","Falta de normalización del diseño"],solutions:["Normalizar el diseño dividiendo en varias tablas","Revisar si todas las columnas son necesarias"],example:`-- Ver número de columnas de una tabla
+SELECT COUNT(*) AS NUM_COLUMNAS
+FROM SYSCAT.COLUMNS
+WHERE TABNAME='MI_TABLA';
+-- Límite z/OS: 750 / LUW: 1012`},
+  {code:'SQLCODE -072',name:'Función SQL anidada / nombre de objeto demasiado largo',severity:'error',cat:'syntax',desc:'El operando de una función SQL es otra función SQL (anidamiento no permitido), o el nombre de objeto supera el máximo.',causes:["Funciones SQL anidadas como SUM(MAX(col))","Nombre de objeto que supera el límite de caracteres"],solutions:["Separar funciones anidadas usando subconsultas","Acortar nombres de objetos al límite permitido"],example:`-- INCORRECTO: funciones anidadas
+-- SELECT SUM(MAX(salario)) FROM emp
+
+-- CORRECTO: subconsulta
+SELECT SUM(max_sal) FROM (
+  SELECT MAX(salario) AS max_sal
+  FROM empleados GROUP BY dept_id
+) AS t;`},
+  {code:'SQLCODE -073',name:'Campo en SELECT no incluido en GROUP BY',severity:'error',cat:'syntax',desc:'Un campo en la SELECT no está incluido en la cláusula GROUP BY.',causes:["Columnas individuales mezcladas con funciones de agregación sin GROUP BY","Omisión de columna en GROUP BY"],solutions:["Añadir al GROUP BY todas las columnas no agregadas del SELECT","Envolver la columna en MAX/MIN"],example:`-- CORRECTO
+SELECT dept_id, nombre, COUNT(*)
+FROM empleados
+GROUP BY dept_id, nombre;
+
+-- O solo con funciones de agregación
+SELECT dept_id, COUNT(*), AVG(salario)
+FROM empleados GROUP BY dept_id;`},
+  {code:'SQLCODE -079',name:'Operación no permitida sobre vista / falta FOR UPDATE',severity:'error',cat:'object',desc:"INSERT, DELETE o UPDATE sobre vista no actualizable. También DELETE con CURSOR sin 'FOR UPDATE OF'.",causes:["Operación de modificación sobre vista con JOIN o GROUP BY","Vista con UNION que no permite modificaciones","DELETE con CURSOR sin 'FOR UPDATE OF' en el DECLARE"],solutions:["Operar sobre la tabla base en lugar de la vista","Añadir 'FOR UPDATE OF campo' en el DECLARE"],example:`-- DECLARE correcto para UPDATE/DELETE con cursor
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, salario
+  FROM empleados
+  WHERE dept = :WS-DEPT
+  FOR UPDATE OF salario
+END-EXEC.`},
+  {code:'SQLCODE -084',name:'Instrucción SQL incorrecta / programa mal compilado',severity:'error',cat:'syntax',desc:'Coma al final del DECLARE, campos mal puestos en SELECT, o campo en SQL que no existe en WORKING-STORAGE.',causes:["Coma sobrante en el último campo del DECLARE","Campos mal ordenados o con nombres incorrectos","Campo referenciado en DB2 que no existe en WORKING","Programa compilado con errores"],solutions:["Revisar el DECLARE buscando comas sobrantes al final","Verificar que todos los campos del SELECT existen","Recompilar el programa desde cero"],example:`* INCORRECTO: coma sobrante al final
+* SELECT id, nombre,  <-- INCORRECTO
+* FROM empleados
+
+* CORRECTO:
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, nombre
+  FROM empleados
+END-EXEC.`},
+  {code:'SQLCODE -086',name:'Operación con valor LOW-VALUES / sin lectura previa',severity:'error',cat:'data',desc:'UPDATE sin haber leído del CURSOR, UPDATE con LOW-VALUES, INSERT con clave LOW-VALUES, o campo con LOW-VALUES en WHERE.',causes:["UPDATE posicionado sin FETCH previo","Campo con valor LOW-VALUES en clave","Variables no inicializadas"],solutions:["Inicializar correctamente variables antes de usarlas en SQL","Verificar que no hay LOW-VALUES antes del INSERT/UPDATE","Usar INITIALIZE o MOVE SPACES/ZEROS"],example:`* Inicializar variables antes del SQL
+INITIALIZE WS-EMPLEADO-REC.
+IF WS-EMP-ID = LOW-VALUES
+  PERFORM ERROR-INICIALIZACION
+END-IF.`},
+  {code:'SQLCODE -101',name:'Instrucción SQL demasiado larga o compleja',severity:'error',cat:'syntax',desc:'La instrucción SQL supera el límite de longitud o complejidad de DB2. También puede indicar mala instalación.',causes:["Sentencia SQL que supera 32KB","Subconsultas demasiado anidadas","Demasiados predicados en WHERE","Mala instalación de DB2"],solutions:["Dividir la consulta usando tablas temporales","Usar tablas temporales para simplificar la lógica"],example:`CREATE GLOBAL TEMPORARY TABLE tmp1 AS (
+  SELECT id FROM empleados
+  WHERE salario > 30000 AND activo = 'S'
+) WITH DATA;
+SELECT e.nombre, e.dept
+FROM empleados e JOIN tmp1 t ON e.id=t.id;`},
+  {code:'SQLCODE -102',name:'Constante de cadena demasiado larga',severity:'error',cat:'syntax',desc:'La longitud de una constante de cadena supera 254 caracteres en la sentencia SQL.',causes:["Literal de texto muy largo en SQL","Comparación con cadena de más de 254 chars hardcodeada"],solutions:["Usar variables host en lugar de literales largos","Pasar el valor como parámetro variable host"],example:`* INCORRECTO: literal largo en SQL
+* WHERE desc = 'texto de mas de 254 chars...'
+
+* CORRECTO: variable host
+01 WS-DESC  PIC X(500).
+MOVE 'texto largo...' TO WS-DESC.
+EXEC SQL SELECT * FROM tabla
+  WHERE descripcion = :WS-DESC
+END-EXEC.`},
+  {code:'SQLCODE -103',name:'Literal numérico inválido / columna no en GROUP BY',severity:'error',cat:'syntax',desc:'El literal es un literal numérico inválido, o una columna en HAVING no está incluida en GROUP BY.',causes:["Literal numérico con coma en lugar de punto decimal","Columna en HAVING que no aparece en GROUP BY"],solutions:["Usar punto como separador decimal: 1500.00","Añadir la columna conflictiva al GROUP BY"],example:`-- Correcto: punto decimal
+WHERE salario > 1500.00
+
+-- HAVING con columnas del GROUP BY
+SELECT dept_id, AVG(salario)
+FROM empleados
+GROUP BY dept_id
+HAVING AVG(salario) > 2000.00;`},
+  {code:'SQLCODE -104',name:'Sintaxis SQL ilegal — token inesperado',severity:'error',cat:'syntax',desc:'Error de sintaxis: falta coma entre campos, token inválido, o fichero con caracteres erróneos. El mensaje indica el token problemático.',causes:["Falta de coma entre dos campos en el SELECT","Token inesperado o palabra clave mal escrita","Fichero SQL con caracteres erróneos"],solutions:["Leer el mensaje de error: indica el token y el esperado","Verificar que todas las comas están correctamente colocadas"],example:`-- Falta de coma entre campos
+-- SELECT id nombre FROM emp  => -104
+
+-- Correcto
+SELECT id, nombre, salario
+FROM empleados
+WHERE activo = 'S';`},
+  {code:'SQLCODE -105',name:'Constante de cadena inválida',severity:'error',cat:'syntax',desc:'Una constante de cadena tiene sintaxis inválida: comillas sin cerrar, comillas dobles en lugar de simples, o caracteres de control.',causes:["Comillas sin cerrar en un literal de texto","Comillas dobles en lugar de simples para literales","Cadena con caracteres de control"],solutions:["Usar comillas simples para literales: WHERE nombre = 'Ana'","Verificar que todas las comillas están emparejadas","Escapar comilla simple dentro del literal: 'O''Brien'"],example:`-- Correcto: comillas simples
+SELECT * FROM clientes
+WHERE nombre = 'Garcia';
+
+-- Escapar comilla simple
+WHERE nombre = 'O''Brien';`},
+  {code:'SQLCODE -107',name:'Nombre de objeto demasiado largo (variante)',severity:'error',cat:'object',desc:'Nombre de tabla, vista, índice o sinónimo más largo del tamaño permitido máximo.',causes:["Nombre de objeto con más de 18 caracteres (versiones antiguas)","Convención de nombres sin validar el límite"],solutions:["Usar nombres dentro del límite permitido de la versión","Verificar el límite de la versión de DB2"],example:`SELECT TABNAME, LENGTH(TABNAME) AS LEN
+FROM SYSCAT.TABLES
+WHERE TABSCHEMA = 'MI_SCHEMA'
+ORDER BY LEN DESC;`},
+  {code:'SQLCODE -109',name:'Cláusula no permitida en instrucción SQL',severity:'error',cat:'syntax',desc:'Una cláusula SQL no está permitida en el contexto de la instrucción actual.',causes:["ORDER BY en subconsulta (versiones antiguas)","GROUP BY en INSERT","Cláusula INTO en contexto incorrecto"],solutions:["Revisar qué cláusulas son válidas para el tipo de instrucción","Consultar la documentación de DB2 para la versión instalada"],example:`-- ORDER BY solo en la consulta exterior
+SELECT id, nombre FROM empleados
+ORDER BY nombre;
+
+-- Numerar filas ordenadas:
+SELECT id, ROW_NUMBER() OVER (ORDER BY id) rn
+FROM empleados;`},
+  {code:'SQLCODE -110',name:'Literal hexadecimal inválido',severity:'error',cat:'syntax',desc:'Literal hexadecimal inválido al comienzo de la variable o en la sentencia SQL.',causes:["Literal X'...' con caracteres no hexadecimales","Longitud de literal hexadecimal impar"],solutions:["Verificar que el literal hexadecimal solo contiene 0-9 y A-F","Asegurar que la longitud del literal es par"],example:`-- Literal hexadecimal correcto
+SELECT * FROM tabla
+WHERE campo = X'0000FFFF';
+
+-- Longitud siempre par: X'41' = 'A'
+-- INCORRECTO: X'4' (longitud impar)`},
+  {code:'SQLCODE -112',name:'Función SQL anidada ilegalmente / recrear tabla',severity:'error',cat:'syntax',desc:'El operando de una función SQL es otra función SQL. También puede requerir borrar y recrear la tabla.',causes:["Funciones SQL anidadas no permitidas","Uso de DISTINCT dentro de función de agregación anidada","Estructura de tabla corrupta que requiere recreación"],solutions:["Separar las funciones usando subconsultas","Borrar la tabla y volver a crearla si hay corrupción"],example:`-- INCORRECTO
+-- SELECT SUM(COUNT(DISTINCT id)) FROM emp
+
+-- CORRECTO: subconsulta
+SELECT COUNT(DISTINCT id)
+FROM empleados
+WHERE dept = :WS-DEPT;`},
+  {code:'SQLCODE -113',name:'Carácter inválido en nombre / operación no permitida',severity:'error',cat:'syntax',desc:'Carácter inválido en un nombre de objeto, o la operación no está permitida en este sistema de bases de datos.',causes:["Nombre de objeto con caracteres no válidos (ñ, acentos, espacios)","Operación no soportada en esta versión de DB2"],solutions:["Usar solo letras A-Z, números y guión bajo en nombres","Verificar qué operaciones soporta la versión instalada"],example:`-- Nombres válidos en DB2: A-Z, 0-9, _
+-- INCORRECTO: CREATE TABLE mi-tabla  => -113
+
+-- CORRECTO:
+CREATE TABLE mi_tabla (
+  id INTEGER NOT NULL,
+  nombre VARCHAR(100)
+);`},
+  {code:'SQLCODE -117',name:'Número de valores insertados no coincide con columnas',severity:'error',cat:'syntax',desc:'El número de valores en el INSERT no corresponde al de columnas. También cuando la DCL de la tabla es mayor que la COPY.',causes:["Lista de columnas con distinto número de elementos que VALUES","DCL de tabla más larga que la COPY asociada","Columna añadida sin actualizar el INSERT"],solutions:["Alinear número de columnas con número de valores","Actualizar la COPY para que coincida con la DCL actual","Especificar siempre la lista de columnas explícitamente"],example:`-- INCORRECTO: 3 columnas, 2 valores
+-- INSERT INTO emp (id, nombre, dept)
+-- VALUES (1, 'Ana'); -- Falta dept
+
+-- CORRECTO
+INSERT INTO empleados (id, nombre, dept)
+VALUES (:WS-ID, :WS-NOM, :WS-DEPT);`},
+  {code:'SQLCODE -118',name:'CURSOR con JOIN o SUBSELECT no modificable',severity:'error',cat:'cursor',desc:'Se intenta declarar un CURSOR con JOIN o SUBSELECT para inserción, modificación o borrado, lo cual no está permitido.',causes:["CURSOR con JOIN y luego UPDATE/DELETE WHERE CURRENT OF","CURSOR con subconsulta en FROM que no permite modificaciones"],solutions:["Usar CURSOR con una sola tabla para modificaciones posicionadas","Realizar modificaciones con UPDATE por clave primaria obtenida en FETCH"],example:`* Leer con JOIN, actualizar por clave
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT e.id, e.sal, d.factor
+  FROM empleados e JOIN depts d ON e.dept_id=d.id
+END-EXEC.
+
+* Actualizar por clave, no por CURRENT OF
+EXEC SQL
+  UPDATE empleados SET salario = :WS-NSAL
+  WHERE id = :WS-ID
+END-EXEC.`},
+  {code:'SQLCODE -119',name:'Columna HAVING no en GROUP BY / nombre largo',severity:'error',cat:'syntax',desc:'Columna en HAVING no incluida en GROUP BY, o nombre de objeto supera el máximo.',causes:["Columna en HAVING que no aparece en GROUP BY","Nombre de objeto que supera 18 caracteres (versiones antiguas)"],solutions:["Añadir la columna al GROUP BY o usar función de agregación","Verificar el límite de longitud para la versión de DB2"],example:`-- CORRECTO
+SELECT dept_id, COUNT(*) AS total
+FROM empleados
+GROUP BY dept_id
+HAVING COUNT(*) > 5;`},
+  {code:'SQLCODE -120',name:'WHERE o SET con función SQL en definición de vista',severity:'error',cat:'syntax',desc:'Una cláusula WHERE o SET incluye una función SQL o referencia a columna en un grupo por cláusula de una definición de vista.',causes:["Función SQL en WHERE de vista","Referencia a columna agrupada en SET de UPDATE en vista"],solutions:["Reestructurar la sentencia evitando funciones de agregación en WHERE","Usar subconsulta en lugar de función en WHERE"],example:`-- Evitar funciones de agregación en WHERE
+-- Usar subconsulta:
+SELECT * FROM empleados e
+WHERE e.salario > (
+  SELECT AVG(salario) FROM empleados
+  WHERE dept_id = e.dept_id
+);`},
+  {code:'SQLCODE -121',name:'Columna identificada más de una vez en INSERT/UPDATE',severity:'error',cat:'syntax',desc:'La columna está identificada más de una vez en la sentencia INSERT o UPDATE.',causes:["Columna repetida en la lista del INSERT","Mismo campo listado dos veces en el SET del UPDATE","Error de copia en la sentencia SQL"],solutions:["Eliminar la columna duplicada del INSERT o UPDATE","Listar cada columna solo una vez"],example:`-- INCORRECTO: id aparece dos veces
+-- INSERT INTO emp (id, nombre, id) VALUES ...
+
+-- CORRECTO
+INSERT INTO empleados (id, nombre, salario)
+VALUES (:WS-ID, :WS-NOM, :WS-SAL);`},
+  {code:'SQLCODE -122',name:'Campo en SELECT sin GROUP BY',severity:'error',cat:'syntax',desc:'SELECT sin GROUP BY contiene nombre de columna y función SQL mezclados, o columna no está en GROUP BY.',causes:["Mezcla de columnas individuales y funciones de agregación sin GROUP BY","Campo en SELECT no es función de agregación y no está en GROUP BY"],solutions:["Añadir GROUP BY con todas las columnas no agregadas del SELECT","Si se quiere un único resultado agregado, eliminar columnas individuales"],example:`-- CORRECTO
+SELECT dept_id, nombre, COUNT(*)
+FROM empleados
+GROUP BY dept_id, nombre;
+
+-- O solo agregados:
+SELECT dept_id, COUNT(*), AVG(salario)
+FROM empleados GROUP BY dept_id;`},
+  {code:'SQLCODE -125',name:'Valor ORDER BY no identifica columna del resultado',severity:'error',cat:'syntax',desc:'Un valor en la cláusula ORDER BY no se puede identificar con ninguna columna del resultado.',causes:["Número de columna en ORDER BY mayor que el número de columnas del SELECT","Nombre de columna en ORDER BY que no aparece en SELECT"],solutions:["Usar el nombre o alias exacto de la columna del SELECT","Si se usa posición numérica, verificar que no supera el número de columnas"],example:`-- CORRECTO: por nombre
+SELECT id, nombre, salario
+FROM empleados ORDER BY nombre;
+
+-- O por posición válida (2 = nombre)
+SELECT id, nombre, salario
+FROM empleados ORDER BY 2;`},
+  {code:'SQLCODE -126',name:'UPDATE y ORDER BY en misma instrucción SELECT',severity:'error',cat:'syntax',desc:'No se puede combinar UPDATE y ORDER BY en el mismo CURSOR.',causes:["CURSOR declarado con FOR UPDATE OF y con ORDER BY","Cláusulas incompatibles en el mismo CURSOR"],solutions:["Eliminar el ORDER BY si el CURSOR es para actualización","Si se necesita ordenar y actualizar, hacer dos pases separados"],example:`* CORRECTO: sin ORDER BY para CURSOR de UPDATE
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, salario
+  FROM empleados
+  WHERE dept = :WS-DEPT
+  FOR UPDATE OF salario
+END-EXEC.`},
+  {code:'SQLCODE -127',name:'DISTINCT múltiple en subconsulta / campo numérico con LIKE',severity:'error',cat:'syntax',desc:'Más de un DISTINCT en una SUBSELECT, campo numérico al usar LIKE, o dos SELECT COUNT(DISTINCT) en la misma sentencia.',causes:["Dos cláusulas DISTINCT en la misma subconsulta","Campo numérico especificado al utilizar LIKE","Dos SELECT COUNT(DISTINCT) en la misma sentencia"],solutions:["Usar un solo DISTINCT por SUBSELECT","Convertir campo numérico a CHAR antes de usar LIKE"],example:`-- INCORRECTO: LIKE sobre numérico
+-- WHERE id LIKE '%5'
+
+-- CORRECTO
+WHERE CHAR(id) LIKE '%5';
+
+-- DOS COUNT DISTINCT separados:
+SELECT
+  (SELECT COUNT(DISTINCT dept_id) FROM empleados),
+  (SELECT COUNT(DISTINCT cargo) FROM empleados)
+FROM SYSIBM.SYSDUMMY1;`},
+  {code:'SQLCODE -128',name:'Uso inválido de NULL en predicado',severity:'error',cat:'syntax',desc:'Uso inválido del NULL en un predicado. NULL no puede usarse con operadores de comparación normales.',causes:["WHERE columna = NULL (incorrecto en SQL estándar)","Operación aritmética con NULL sin COALESCE","Uso de != NULL en lugar de IS NOT NULL"],solutions:["Usar IS NULL o IS NOT NULL","Usar COALESCE(columna, default) para NULLs en expresiones","Nunca usar = NULL o != NULL en WHERE"],example:`-- INCORRECTO
+-- WHERE email = NULL
+
+-- CORRECTO
+SELECT * FROM empleados WHERE email IS NULL;
+SELECT * FROM empleados WHERE email IS NOT NULL;
+
+-- Manejar NULL en expresiones
+SELECT COALESCE(email,'sin_email') FROM empleados;`},
+  {code:'SQLCODE -129',name:'Demasiados nombres de tablas en una instrucción',severity:'error',cat:'syntax',desc:'La sentencia SQL referencia más tablas de las permitidas en una sola instrucción.',causes:["JOIN con demasiadas tablas","Subconsultas múltiples con referencias adicionales"],solutions:["Dividir la consulta con tablas temporales","Reducir el número de JOINs procesando en varios pasos"],example:`-- Dividir en pasos con tablas temporales
+CREATE GLOBAL TEMPORARY TABLE tmp1 AS (
+  SELECT e.id, d.nombre AS dept
+  FROM empleados e JOIN departamentos d
+    ON e.dept_id = d.id
+) WITH DATA;
+SELECT t.*, p.nombre AS proyecto
+FROM tmp1 t JOIN proyectos p ON t.id=p.resp_id;`},
+  {code:'SQLCODE -131',name:'LIKE con valores incompatibles',severity:'error',cat:'syntax',desc:'La orden LIKE tiene valores incompatibles entre los tipos de datos de los operandos.',causes:["LIKE con columna o valor numérico","Tipos incompatibles entre los dos operandos del LIKE","LIKE con columna DATE o TIMESTAMP directamente"],solutions:["Convertir columnas numéricas a CHAR antes de usar LIKE","Asegurar que ambos operandos son cadenas de texto"],example:`-- INCORRECTO
+-- WHERE id LIKE '%5%'
+
+-- CORRECTO: convertir a CHAR
+WHERE CHAR(id) LIKE '%5%';
+
+-- Para fechas:
+WHERE CHAR(fecha_alta) LIKE '2024%';`},
+  {code:'SQLCODE -132',name:'Predicado LIKE inválido',severity:'error',cat:'syntax',desc:'Predicado LIKE inválido: el primer operando no es columna o el segundo no es una cadena.',causes:["Primer operando de LIKE no es columna sino expresión compleja","Segundo operando (patrón) no es cadena literal ni variable host"],solutions:["El primer operando de LIKE debe ser columna tipo cadena","El segundo operando debe ser literal de cadena o variable host"],example:`-- CORRECTO
+SELECT * FROM clientes
+WHERE nombre LIKE :WS-PATRON;
+
+* WS-PATRON puede ser 'Gar%' o '%cia'
+MOVE 'Gar%' TO WS-PATRON.`},
+  {code:'SQLCODE -134',name:'Uso impropio de longitud máxima de variable',severity:'error',cat:'data',desc:'Uso impropio de la longitud de la variable o columna de máxima longitud permitida.',causes:["Variable host VARCHAR con longitud mayor a 254 (límite antiguo)","LONG VARCHAR en contexto que no lo permite","Longitud de variable incompatible con el contexto"],solutions:["Usar CLOB para contenido más largo que 254/32KB según versión","Verificar el límite de longitud de la versión de DB2"],example:`-- Para texto largo: usar CLOB
+CREATE TABLE documentos (
+  id INTEGER NOT NULL,
+  contenido CLOB(1M)
+);
+
+-- VARCHAR: máximo 32672 bytes en DB2 LUW moderno`},
+  {code:'SQLCODE -136',name:'Clave SORT superior a 4000 bytes',severity:'error',cat:'data',desc:'La longitud de la clave de ordenación supera 4000 bytes.',causes:["ORDER BY con columnas cuya suma supera 4000 bytes","Columnas VARCHAR largas combinadas en el ORDER BY"],solutions:["Reducir el número o longitud de columnas en ORDER BY","Ordenar por columnas más cortas"],example:`-- Ordenar por columna corta
+SELECT id, descripcion FROM articulos
+ORDER BY id;
+
+-- Si se necesita ordenar por texto largo:
+SELECT id, descripcion FROM articulos
+ORDER BY SUBSTR(descripcion,1,100);`},
+  {code:'SQLCODE -137',name:'Resultado de concatenación demasiado largo',severity:'error',cat:'data',desc:'El resultado de la concatenación de cadenas es demasiado largo para el tipo de dato resultante.',causes:["Concatenación de cadenas que produce resultado mayor al tipo de la columna","Varios VARCHAR concatenados que superan el límite"],solutions:["Verificar la longitud total de las cadenas concatenadas","Usar SUBSTR para truncar si el resultado puede ser muy largo"],example:`-- Verificar longitud antes de concatenar
+SELECT CASE
+  WHEN LENGTH(a) + LENGTH(b) > 200
+  THEN SUBSTR(a||b, 1, 200)
+  ELSE a || ' ' || b
+END AS resultado
+FROM tabla;`},
+  {code:'SQLCODE -138',name:'ALTER TABLE / DROP sobre objeto que identifica una vista',severity:'error',cat:'object',desc:'Instrucción ALTER TABLE, DROP TABLE, LOCK TABLE o CREATE INDEX identifica una vista en lugar de una tabla.',causes:["Intentar ALTER o DROP sobre una vista como si fuera tabla","CREATE INDEX sobre una vista"],solutions:["Verificar que el objeto es una tabla y no una vista con SYSCAT.TABLES","Usar DROP VIEW para eliminar vistas"],example:`-- Verificar si es tabla o vista
+SELECT TABNAME, TYPE
+FROM SYSCAT.TABLES
+WHERE TABNAME = 'MI_OBJETO';
+-- TYPE='T' es tabla, TYPE='V' es vista
+
+-- Para eliminar una vista:
+DROP VIEW mi_vista;`},
+  {code:'SQLCODE -143',name:'Cláusula FOR UPDATE con inconsistencia en tabla',severity:'error',cat:'cursor',desc:'La cláusula FOR UPDATE no puede especificarse porque existe inconsistencia con TABLAS precedentes.',causes:["CURSOR con FOR UPDATE sobre tabla con restricciones incompatibles","Vista que no permite actualización","El mismo error puede ocurrir en entorno PC"],solutions:["Verificar que la tabla del CURSOR soporta FOR UPDATE","Si es una vista, verificar que es actualizable"],example:`EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, salario FROM empleados
+  FOR UPDATE OF salario
+END-EXEC.
+-- Verificar: la tabla no debe tener UNION, GROUP BY, etc.`},
+  {code:'SQLCODE -150',name:'Operación no permitida en vista',severity:'error',cat:'object',desc:'INSERT, DELETE o UPDATE sobre una vista para la cual la operación no está permitida.',causes:["INSERT/UPDATE/DELETE sobre vista con JOIN, GROUP BY, DISTINCT o UNION","Vista que no tiene las propiedades de actualización requeridas","DELETE con CURSOR sin 'FOR UPDATE OF'"],solutions:["Operar sobre la tabla base en lugar de la vista","Verificar si la vista es actualizable (sin JOIN/GROUP BY/DISTINCT)","Añadir FOR UPDATE OF en el DECLARE del CURSOR"],example:`-- Vista actualizable: una sola tabla, sin agregaciones
+CREATE VIEW v_emp_activos AS
+  SELECT id, nombre, salario
+  FROM empleados
+  WHERE activo = 'S';
+-- INSERT/UPDATE/DELETE sobre esta vista SI funciona`},
+  {code:'SQLCODE -151',name:'UPDATE de columna que indica que no puede ser actualizada',severity:'error',cat:'object',desc:'El UPDATE no es válido porque la descripción de la columna indica que no puede ser actualizada.',causes:["Columna GENERATED ALWAYS que no permite actualización manual","Columna de vista calculada que no puede actualizarse","Restricción de columna que prohíbe UPDATE"],solutions:["Excluir la columna del UPDATE","Usar columnas GENERATED BY DEFAULT si se necesita actualizar"],example:`-- Ver si la columna es generada
+SELECT COLNAME, GENERATED
+FROM SYSCAT.COLUMNS
+WHERE TABNAME='MI_TABLA';
+-- 'A' = ALWAYS (no se puede UPDATE)
+-- 'D' = BY DEFAULT (se puede UPDATE)`},
+  {code:'SQLCODE -153',name:'CREATE VIEW sin lista de columnas requerida',severity:'error',cat:'object',desc:'CREATE VIEW no incluye una lista de columnas requerida.',causes:["Vista con columnas calculadas sin alias","SELECT con expresiones no nombradas en la vista","Columnas duplicadas en la vista sin alias"],solutions:["Añadir alias explícitos a todas las columnas de la vista","Usar CREATE VIEW nombre_vista (col1, col2, ...) AS SELECT ..."],example:`-- CORRECTO: alias explícitos en vista
+CREATE VIEW v_resumen AS
+SELECT dept_id,
+       COUNT(*) AS num_empleados,
+       AVG(salario) AS salario_medio,
+       MAX(salario) AS salario_max
+FROM empleados
+GROUP BY dept_id;`},
+  {code:'SQLCODE -158',name:'Número de campos en vista distinto al del SELECT',severity:'error',cat:'object',desc:'El número de campos especificados en una vista es distinto de los especificados en la SELECT.',causes:["Lista de columnas de la vista con diferente número que el SELECT","Columna añadida al SELECT sin añadirla a la lista de la vista"],solutions:["Alinear el número de columnas de la lista de la vista con el SELECT","O no especificar lista de columnas y dejar que se infieran del SELECT"],example:`-- CORRECTO: sin lista (se infieren del SELECT)
+CREATE VIEW v_empleados AS
+  SELECT id, nombre, salario, dept_id
+  FROM empleados WHERE activo = 'S';
+
+-- O con lista que coincida exactamente con el SELECT
+CREATE VIEW v_emp (id, nom, sal, dept) AS
+  SELECT id, nombre, salario, dept_id
+  FROM empleados;`},
+  {code:'SQLCODE -160',name:'WITH CHECK OPTION no puede usarse para la vista',severity:'error',cat:'object',desc:'La instrucción WITH CHECK OPTION no puede ser usada para la vista especificada.',causes:["Vista con JOIN donde WITH CHECK OPTION no es aplicable","Vista con GROUP BY que no permite WITH CHECK OPTION","Vista no actualizable a la que se intenta añadir WITH CHECK OPTION"],solutions:["Eliminar WITH CHECK OPTION de la vista no actualizable","Usar WITH CHECK OPTION solo en vistas simples de una tabla"],example:`-- WITH CHECK OPTION solo en vistas simples
+CREATE VIEW v_emp_activos AS
+  SELECT * FROM empleados
+  WHERE activo = 'S'
+  WITH CHECK OPTION;  -- Solo válido en vistas simples actualizables`},
+  {code:'SQLCODE -161',name:'INSERT/UPDATE viola la definición de la vista',severity:'error',cat:'object',desc:'El INSERT o UPDATE no está permitido porque la fila resultante no satisface la definición de la vista.',causes:["INSERT que viola la condición WHERE de la vista WITH CHECK OPTION","UPDATE que cambia una fila haciéndola invisible en la vista"],solutions:["Verificar que el valor cumple la condición WHERE de la vista","Insertar directamente en la tabla base si la vista tiene restricciones"],example:`-- Si la vista tiene WITH CHECK OPTION:
+-- INSERT debe cumplir el WHERE de la vista
+CREATE VIEW v_emp_activos AS
+  SELECT * FROM empleados WHERE activo = 'S'
+  WITH CHECK OPTION;
+
+-- Este INSERT fallará con -161:
+-- INSERT INTO v_emp_activos ... WITH activo='N'`},
+  {code:'SQLCODE -180',name:'Formato de fecha/hora inválido',severity:'error',cat:'data',desc:'La representación de cadena de un valor DATE, TIME o TIMESTAMP no tiene el formato correcto.',causes:["Formato DD/MM/YYYY en lugar del ISO YYYY-MM-DD","Timestamp con separadores incorrectos","Cadena de fecha con caracteres no numéricos"],solutions:["Usar formato ISO: YYYY-MM-DD para fechas","Para timestamps: YYYY-MM-DD-HH.MM.SS.FFFFFF","Usar DATE() o TIMESTAMP() para conversión explícita"],example:`-- Formato DB2 correcto
+VALUES CURRENT DATE;      -- YYYY-MM-DD
+VALUES CURRENT TIMESTAMP; -- YYYY-MM-DD-HH.MM.SS.MMMMMM
+
+INSERT INTO eventos (fecha) VALUES ('2024-12-25');
+INSERT INTO logs (ts) VALUES ('2024-12-25-14.30.00.000000');`},
+  {code:'SQLCODE -181',name:'Cadena no convertible a fecha/hora válida',severity:'error',cat:'data',desc:'La cadena no puede convertirse a DATE/TIME/TIMESTAMP válido. También al recuperar fila con fecha a blancos en columna DATE.',causes:["Fecha inexistente como 2024-02-30","Cadena vacía asignada a columna DATE","Fecha a blancos en columna DATE","Hora con horas > 23"],solutions:["Inicializar columnas DATE con '0001-01-01' en lugar de SPACES","Verificar que la fecha exista en el calendario gregoriano","Usar COALESCE para manejar fechas nulas"],example:`-- Inicializar fecha con valor mínimo válido
+INSERT INTO contratos (fecha_ini)
+VALUES ('0001-01-01');
+
+-- Manejar fecha nula
+SELECT COALESCE(fecha_venc,'9999-12-31') FROM contratos;
+
+* COBOL:
+IF WS-FECHA = SPACES
+  MOVE '0001-01-01' TO WS-FECHA
+END-IF.`},
+  {code:'SQLCODE -182',name:'Expresión aritmética inválida con fecha/hora',severity:'error',cat:'data',desc:'Una expresión aritmética que involucra un valor de fecha/hora es inválida.',causes:["Suma de dos fechas (solo se puede sumar fecha + duración)","Multiplicar o dividir fechas","Tipos de fecha incompatibles en la expresión"],solutions:["Añadir duraciones: fecha + N DAYS/MONTHS/YEARS","Usar DAYS() para diferencia entre fechas"],example:`-- Aritmética de fechas correcta
+SELECT CURRENT DATE + 30 DAYS AS vencimiento
+FROM SYSIBM.SYSDUMMY1;
+
+-- Diferencia entre fechas
+SELECT DAYS(fecha_fin) - DAYS(fecha_ini) AS dias
+FROM proyectos;
+
+-- Sumar meses
+SELECT fecha_inicio + 3 MONTHS AS nueva_fecha
+FROM contratos;`},
+  {code:'SQLCODE -183',name:'Resultado de aritmética de fecha fuera de rango',severity:'error',cat:'data',desc:'Operación aritmética con fecha obtiene resultado fuera del rango válido (0001-01-01 a 9999-12-31).',causes:["Suma de años que supera el año 9999","Resta que genera fecha anterior a 0001-01-01","Cálculo con valores extremos de fecha"],solutions:["Verificar que el resultado queda en el rango válido","Validar datos de entrada antes de la operación"],example:`-- Verificar rango antes de calcular
+SELECT CASE
+  WHEN YEAR(fecha) + :WS-ANIOS > 9999
+  THEN DATE('9999-12-31')
+  ELSE fecha + :WS-ANIOS YEARS
+END AS nueva_fecha
+FROM contratos;`},
+  {code:'SQLCODE -198',name:'PREPARE o EXECUTE con operando vacío',severity:'error',cat:'syntax',desc:'El operando de la declaración PREPARE o EXECUTE está vacío o en blanco.',causes:["Variable host para PREPARE que contiene solo espacios","Sentencia SQL dinámica no inicializada","String de SQL vacío en EXECUTE IMMEDIATE"],solutions:["Verificar que la variable contiene SQL válido antes de PREPARE","Añadir validación de que el string no es blanco"],example:`01 WS-SQL-STMT  PIC X(500).
+
+IF WS-SQL-STMT = SPACES
+  PERFORM ERROR-SQL-VACIO
+ELSE
+  EXEC SQL PREPARE STMT1 FROM :WS-SQL-STMT END-EXEC
+  IF SQLCODE = 0
+    EXEC SQL EXECUTE STMT1 END-EXEC
+  END-IF
+END-IF.`},
+  {code:'SQLCODE -199',name:'Uso ilegal de palabra clave',severity:'error',cat:'syntax',desc:'Uso ilegal de una palabra clave SQL. Se esperaba uno de los tokens indicados en el mensaje.',causes:["Palabra reservada de DB2 usada como nombre de columna sin delimitadores","Palabra clave en contexto incorrecto"],solutions:["Delimitar nombres que coinciden con palabras reservadas con comillas dobles","Renombrar el objeto si su nombre es una palabra reservada"],example:`-- Nombres reservados deben delimitarse
+-- SELECT date FROM tabla  => -199
+
+-- Correcto: delimitar con comillas dobles
+SELECT "date", "value", "order"
+FROM mi_tabla;
+
+-- Mejor: evitar nombres reservados
+SELECT fecha_proceso, valor_campo FROM mi_tabla;`},
+  {code:'SQLCODE -203',name:'Referencia a columna ambigua',severity:'error',cat:'syntax',desc:'Referencia ambigua porque el mismo nombre de columna existe en más de una tabla del FROM.',causes:["JOIN entre tablas con columnas del mismo nombre sin cualificación","SELECT col sin prefijo cuando col existe en múltiples tablas"],solutions:["Cualificar columnas con alias de tabla en JOINs: e.id, d.id","Asignar alias descriptivos a las tablas"],example:`-- CORRECTO: cualificar con alias
+SELECT e.id, e.nombre, d.id AS dept_id, d.nombre AS dept
+FROM empleados e
+JOIN departamentos d ON e.dept_id = d.id
+WHERE e.activo = 'S';`},
+  {code:'SQLCODE -204',name:'Nombre no definido en DB2',severity:'error',cat:'object',desc:"Tabla, vista, alias u objeto SQL no definido en DB2. También cuando faltan ':' en variables host de la WHERE o la COPY no coincide con CREATE.",causes:["Tabla no creada o mal creada en el entorno","Nombre con typo ortográfico","Falta ':' delante de variables host en WHERE","COPY no coincide con el CREATE TABLE actual"],solutions:["Verificar existencia en SYSCAT.TABLES","Añadir ':' delante de TODAS las variables host en SQL","Regenerar la COPY con DCLGEN"],example:`-- Verificar existencia
+SELECT TABSCHEMA, TABNAME
+FROM SYSCAT.TABLES
+WHERE TABNAME = 'MI_TABLA';
+
+* Variables host necesitan ':'
+EXEC SQL
+  SELECT * FROM empleados
+  WHERE id = :WS-ID AND dept = :WS-DEPT
+END-EXEC.`},
+  {code:'SQLCODE -205',name:'Nombre de columna no existe en la tabla',severity:'error',cat:'syntax',desc:'El nombre de columna referenciado no existe en la tabla.',causes:["Nombre de columna con typo","Columna eliminada o renombrada","COPY desactualizada respecto al esquema"],solutions:["Verificar el nombre con SYSCAT.COLUMNS","Recompilar y rebindear si la columna fue renombrada","Actualizar la COPY con DCLGEN"],example:`SELECT COLNAME, TYPENAME, LENGTH, NULLS
+FROM SYSCAT.COLUMNS
+WHERE TABNAME = 'EMPLEADOS'
+  AND TABSCHEMA = 'MI_SCHEMA'
+ORDER BY COLNO;`},
+  {code:'SQLCODE -206',name:'Columna no existente en la tabla',severity:'error',cat:'syntax',desc:'El nombre de columna no existe en la tabla. También con tabla creada con índices antiguos. Al abrir cursor, revisar el DECLARE.',causes:["Nombre de columna mal escrito o inexistente","Tabla creada con índices de versión anterior incompatible","Error en nombre de columna en el DECLARE del CURSOR"],solutions:["Verificar nombre exacto con SYSCAT.COLUMNS","Si es al abrir CURSOR, revisar el DECLARE detenidamente","Recompilar y rebindear tras cualquier cambio de esquema"],example:`SELECT COLNAME, TYPENAME, LENGTH
+FROM SYSCAT.COLUMNS
+WHERE TABNAME='EMPLEADOS'
+ORDER BY COLNO;
+
+-- Si la tabla tiene índices antiguos, recrearla:
+-- DROP TABLE ... / CREATE TABLE ... / CREATE INDEX ...`},
+  {code:'SQLCODE -207',name:'ORDER BY con nombre de columna en UNION',severity:'error',cat:'syntax',desc:'La cláusula ORDER BY es inválida porque incluye un nombre de columna en el resultado de una unión (UNION).',causes:["ORDER BY con nombre de columna en vez de posición en UNION","Columna ambigua en el resultado del UNION"],solutions:["En UNION, usar posición numérica en ORDER BY","Asegurar que los alias de columnas son iguales en ambas partes del UNION"],example:`-- CORRECTO: ORDER BY por posición en UNION
+SELECT id, nombre FROM empleados_activos
+UNION
+SELECT id, nombre FROM empleados_historico
+ORDER BY 2;  -- Por posición, no por nombre`},
+  {code:'SQLCODE -208',name:'Campos del ORDER BY no están en el SELECT del CURSOR',severity:'error',cat:'cursor',desc:'CURSOR con ORDER BY en el que los campos del ORDER BY no se estaban seleccionando en la sentencia SELECT.',causes:["Columna en ORDER BY que no aparece en el SELECT del CURSOR","Referencia a columna no seleccionada para ordenar"],solutions:["Añadir la columna del ORDER BY al SELECT del CURSOR","O eliminar esa columna del ORDER BY"],example:`-- CORRECTO: columna de ORDER BY en el SELECT
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, nombre, fecha_alta  -- fecha incluida
+  FROM empleados
+  ORDER BY fecha_alta             -- OK: esta en SELECT
+END-EXEC.`},
+  {code:'SQLCODE -215',name:'Cursor cerrado en FETCH o CLOSE',severity:'error',cat:'cursor',desc:'Intento de leer (FETCH) o cerrar (CLOSE) un CURSOR que ya está cerrado.',causes:["FETCH después de haber cerrado el CURSOR","CLOSE sobre CURSOR ya cerrado","Flujo de control que cierra el CURSOR prematuramente"],solutions:["Rastrear el estado del CURSOR con variable de estado","Evitar CLOSE doble verificando el estado"],example:`01 WS-CUR-ESTADO  PIC X VALUE 'C'.
+
+IF WS-CUR-ESTADO = 'A'
+  EXEC SQL FETCH C1 INTO :WS-ID,:WS-NOM END-EXEC
+  EVALUATE SQLCODE
+    WHEN 0   PERFORM PROCESS-ROW
+    WHEN 100
+      EXEC SQL CLOSE C1 END-EXEC
+      MOVE 'C' TO WS-CUR-ESTADO
+  END-EVALUATE
+END-IF.`},
+  {code:'SQLCODE -219',name:'Tabla en DECLARE no existe',severity:'error',cat:'object',desc:'El nombre de tabla en el DECLARE de CURSOR no existe en el catálogo de DB2.',causes:["Tabla no creada en el entorno de ejecución","Nombre de tabla con error tipográfico","Tabla en esquema diferente al implícito"],solutions:["Verificar existencia con SYSCAT.TABLES","Usar nombre cualificado esquema.tabla en el DECLARE","Asegurar que el entorno de ejecución es el correcto"],example:`SELECT TABSCHEMA, TABNAME, TYPE
+FROM SYSCAT.TABLES
+WHERE TABNAME = 'MI_TABLA';
+
+-- DECLARE con nombre cualificado
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, nombre
+  FROM mi_schema.empleados
+END-EXEC.`},
+  {code:'SQLCODE -220',name:'Tabla con PRIMARY KEY en estado incorrecto',severity:'error',cat:'object',desc:'Tabla mal creada, posiblemente tiene una PRIMARY KEY que está causando problemas. Puede requerir QUIT y recreación.',causes:["PRIMARY KEY definida sobre columna anulable","Restricción PRIMARY KEY violada durante la creación","Tabla con estado inconsistente en el catálogo"],solutions:["Verificar la definición de PRIMARY KEY con SYSCAT.KEYCOLUSE","Recrear la tabla asegurando que la PK es sobre columnas NOT NULL"],example:`-- Ver PRIMARY KEY de la tabla
+SELECT k.COLNAME, k.COLSEQ
+FROM SYSCAT.KEYCOLUSE k
+JOIN SYSCAT.TABCONST c
+  ON k.TABNAME=c.TABNAME AND c.TYPE='P'
+WHERE k.TABNAME='MI_TABLA'
+ORDER BY k.COLSEQ;`},
+  {code:'SQLCODE -229',name:'Para dar de alta, el padre debe existir previamente',severity:'error',cat:'integrity',desc:'Para dar de alta en la tabla, debe estar dado de alta en la tabla padre referenciada por integridad referencial.',causes:["INSERT en tabla hija antes de insertar en la tabla padre","Violación de integridad referencial por orden incorrecto","Clave foránea que referencia un padre inexistente"],solutions:["Insertar siempre primero en la tabla padre y luego en la hija","Verificar existencia del padre antes del INSERT","Usar transacciones para garantizar el orden correcto"],example:`-- Orden correcto: padre primero
+INSERT INTO departamentos (id, nombre)
+VALUES (:WS-DEPT-ID, :WS-DEPT-NOM);
+
+INSERT INTO empleados (id, nombre, dept_id)
+VALUES (:WS-EMP-ID, :WS-NOM, :WS-DEPT-ID);`},
+  {code:'SQLCODE -232',name:'Falta crear índices en tablas con integridad referencial',severity:'error',cat:'integrity',desc:'Falta crear índices en tablas con integridad referencial. Las tablas con FK requieren índices sobre las claves.',causes:["Tabla con FOREIGN KEY sin índice sobre las columnas de la FK","Tabla con PRIMARY KEY sin índice único"],solutions:["Crear índice único sobre la PRIMARY KEY de la tabla padre","Crear índice sobre las columnas de la FOREIGN KEY en la tabla hija"],example:`-- Crear índice para la PK
+CREATE UNIQUE INDEX IDX_DEPT_PK ON departamentos (id);
+
+-- Crear índice para la FK en tabla hija
+CREATE INDEX IDX_EMP_DEPT_FK ON empleados (dept_id);`},
+  {code:'SQLCODE -247',name:'Campo DATE en clave sin valor mínimo',severity:'error',cat:'data',desc:"Al acceder a tabla con campo CLAVE en formato DATE sin haberle inicializado con al menos '0001-01-01'.",causes:["Campo DATE de la clave con blancos o LOW-VALUES","INSERT que omite el valor de un campo DATE de la clave","Programa que inicializa variables con SPACES"],solutions:["Inicializar siempre campos DATE con '0001-01-01' como mínimo","Verificar que el INSERT incluye valor válido para el campo DATE de la clave","Usar DEFAULT en la definición de la columna DATE"],example:`-- DEFAULT para campo DATE en clave
+CREATE TABLE contratos (
+  fecha_ini DATE NOT NULL DEFAULT '0001-01-01',
+  codigo    CHAR(10) NOT NULL,
+  PRIMARY KEY (fecha_ini, codigo)
+);
+
+* COBOL: inicializar siempre
+MOVE '0001-01-01' TO WS-FECHA-INI.`},
+  {code:'SQLCODE -251',name:'Token NAME inválido',severity:'error',cat:'syntax',desc:'Token NAME inválido en la sentencia SQL.',causes:["Nombre de objeto que contiene caracteres no válidos","Identificador mal formado en la sentencia SQL","Uso de nombre reservado sin delimitadores"],solutions:["Verificar que el nombre solo contiene caracteres válidos (letras, números, guión bajo)","Delimitar con comillas dobles si el nombre es una palabra reservada"],example:`-- Identificadores válidos en DB2
+-- Letras A-Z, números 0-9, guión bajo _
+-- Deben empezar por letra o guión bajo
+
+-- Si el nombre tiene caracteres especiales:
+SELECT "mi-columna" FROM "mi.tabla";`},
+  {code:'SQLCODE -270',name:'UPDATE sobre fila tras lectura con +100',severity:'error',cat:'cursor',desc:'Se actualiza el campo de una tabla cuando la lectura anterior ha dado un valor +100 (sin datos), dejando el CURSOR en posición inválida.',causes:["UPDATE WHERE CURRENT OF tras FETCH que devolvió +100","Bucle que actualiza incluso cuando FETCH devolvió fin de datos"],solutions:["Verificar SQLCODE = 0 después de FETCH antes de hacer UPDATE","Nunca hacer UPDATE posicionado si el FETCH devolvió +100"],example:`EXEC SQL FETCH C1 INTO :WS-ID, :WS-SAL END-EXEC.
+EVALUATE SQLCODE
+  WHEN 0
+    COMPUTE WS-NSAL = WS-SAL * 1.10
+    EXEC SQL
+      UPDATE empleados SET salario = :WS-NSAL
+      WHERE CURRENT OF C1
+    END-EXEC
+  WHEN 100
+    SET WS-FIN-CURSOR TO TRUE
+  WHEN OTHER
+    PERFORM ERROR-HANDLER
+END-EVALUATE.`},
+  {code:'SQLCODE -301',name:'Variable host incompatible / tipo DATA',severity:'error',cat:'data',desc:'Tipo de dato de la variable host incompatible con la columna DB2, o el valor de columna es de tipo DATA no utilizable.',causes:["Variable PIC S9(9) para columna VARCHAR","Longitud de variable host insuficiente","Columna de tipo DATA en formato incompatible"],solutions:["Alinear el tipo de variable host con el tipo de columna DB2","Usar variables intermedias para conversión"],example:`* Columna DB2: VARCHAR(50)
+01 WS-NOMBRE.
+   49 WS-NOM-LEN   PIC S9(4) COMP.
+   49 WS-NOM-DATA  PIC X(50).
+
+* Columna DB2: DECIMAL(9,2)
+01 WS-IMPORTE   PIC S9(7)V9(2) COMP-3.`},
+  {code:'SQLCODE -302',name:'Valor demasiado grande / DUMMY de tabla diferente',severity:'error',cat:'data',desc:'Valor demasiado grande para la columna, DUMMY de distinta longitud que la tabla DB2, o nuevas columnas no inicializadas.',causes:["Valor numérico que excede la precisión DECIMAL(p,s)","DUMMY/COPY con longitud diferente a la tabla real","Nuevas columnas añadidas sin inicializar en el programa"],solutions:["Ampliar la columna con ALTER TABLE","Regenerar COPY/DUMMY con DCLGEN","Inicializar TODAS las variables del registro al añadir nuevas columnas"],example:`-- Ampliar columna
+ALTER TABLE empleados
+ALTER COLUMN descripcion
+  SET DATA TYPE VARCHAR(500);
+
+* Inicializar todas las variables
+INITIALIZE WS-EMPLEADO-REGISTRO.`},
+  {code:'SQLCODE -303',name:'Columnas de CURSOR no referenciadas en FETCH',severity:'error',cat:'cursor',desc:'Las columnas de la SELECT del DECLARE del CURSOR no están referenciadas en el FETCH, o los tipos no coinciden.',causes:["Columnas en SELECT del CURSOR sin variable correspondiente en FETCH","Fields de tabla con picture incorrecta","Diferencia entre lo que devuelve el SELECT y las variables del FETCH"],solutions:["Alinear exactamente columnas del SELECT con variables del FETCH","Verificar que la COPY refleja fielmente la definición de la tabla"],example:`* SELECT debe coincidir exactamente con FETCH
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, nombre, salario, dept_id  -- 4 columnas
+  FROM empleados
+END-EXEC.
+
+EXEC SQL FETCH C1
+  INTO :WS-ID,      -- 1
+       :WS-NOM,     -- 2
+       :WS-SAL,     -- 3
+       :WS-DEPT     -- 4
+END-EXEC.`},
+  {code:'SQLCODE -304',name:'Valor no asignable a variable host / SUM sin filas',severity:'error',cat:'data',desc:'Valor no asignable a variable host por tipo incompatible. También en SELECT SUM sin filas que devuelva resultado.',causes:["Tipo del resultado incompatible con la variable host","SELECT SUM/MAX/MIN sobre conjunto vacío sin COALESCE"],solutions:["Usar COALESCE en SUM/MAX/MIN para manejar resultado nulo","Asegurar que el tipo de la variable host es compatible"],example:`-- Manejar SUM/MAX sobre conjunto vacío
+SELECT COALESCE(SUM(importe), 0) INTO :WS-TOTAL
+FROM pedidos WHERE cliente_id = :WS-ID;
+
+SELECT COALESCE(MAX(salario), 0) INTO :WS-MAX
+FROM empleados WHERE dept_id = :WS-DEPT;`},
+  {code:'SQLCODE -305',name:'NULL en variable sin indicador',severity:'error',cat:'data',desc:'El valor nulo no puede asignarse a variable host sin variable indicadora. También con fecha a blancos en columna DATE.',causes:["Columna anulable sin variable indicadora en FETCH/SELECT INTO","SELECT SUM/MAX que devuelve NULL cuando no hay filas","Fecha a blancos en columna tipo DATE"],solutions:["Añadir variable indicadora (PIC S9(4) COMP) para cada columna anulable","Usar COALESCE() para valor por defecto","Inicializar campos DATE con '0001-01-01' en lugar de SPACES"],example:`01 WS-EMAIL      PIC X(100).
+01 WS-EMAIL-IND  PIC S9(4) COMP.
+
+EXEC SQL
+  SELECT email INTO :WS-EMAIL :WS-EMAIL-IND
+  FROM empleados WHERE id = :WS-ID
+END-EXEC.
+
+IF WS-EMAIL-IND < 0
+  MOVE 'sin_email@emp.com' TO WS-EMAIL
+END-IF.`},
+  {code:'SQLCODE -309',name:'Campo con valor nulo en atributo',severity:'error',cat:'data',desc:'El atributo es inválido porque el campo de la tabla tiene valor nulo y la operación no puede realizarse sobre NULL.',causes:["Operación aritmética sobre columna que contiene NULL","Campo nulo en expresión sin COALESCE/VALUE","Función que no acepta NULL aplicada a campo nulo"],solutions:["Usar COALESCE(campo, default) antes de la operación","Verificar IS NOT NULL antes de usar el campo"],example:`SELECT id,
+       COALESCE(salario, 0) AS salario,
+       COALESCE(comision, 0) AS comision,
+       COALESCE(salario,0)+COALESCE(comision,0) AS total
+FROM empleados;`},
+  {code:'SQLCODE -310',name:'INSERT con DUMMY de tabla diferente longitud',severity:'error',cat:'data',desc:'Al realizar INSERT y la DUMMY de la tabla es de distinta longitud que la tabla DB2, o nuevas columnas no inicializadas.',causes:["DUMMY con longitud diferente a la tabla real","Nuevas columnas añadidas sin actualizar la DUMMY","Diferencia de longitud total entre estructura COBOL y tabla DB2"],solutions:["Regenerar la DUMMY/COPY con DCLGEN","Inicializar todas las variables, especialmente las nuevas"],example:`/* Regenerar COPY actualizada */
+DCLGEN TABLE(MI_SCHEMA.MI_TABLA)
+        LIBRARY(MI_LIB(MI_TABLA))
+        ACTION(REPLACE)
+        LANGUAGE(COBOL)
+
+* Inicializar todas las variables
+INITIALIZE WS-MI-TABLA-REC.`},
+  {code:'SQLCODE -311',name:'Indicador de longitud de campo negativo',severity:'error',cat:'data',desc:'El indicador de longitud de un campo (variable de longitud VARCHAR) es negativo.',causes:["Variable de longitud VARCHAR no inicializada","Longitud negativa por fallo de inicialización","Desbordamiento en el cálculo de longitud"],solutions:["Inicializar la variable de longitud en 0 antes del SQL","Verificar que la longitud esté en rango 0..n"],example:`01 WS-COMENTARIO.
+   49 WS-COM-LEN   PIC S9(4) COMP VALUE 0.
+   49 WS-COM-DATA  PIC X(200).
+
+* Inicializar antes del SQL
+MOVE 0 TO WS-COM-LEN.
+MOVE SPACES TO WS-COM-DATA.`},
+  {code:'SQLCODE -312',name:'Nombre de campo no definido o no se puede usar',severity:'error',cat:'syntax',desc:'Nombre de campo de la tabla no definido o no se puede usar en el contexto actual.',causes:["Variable host referenciada en SQL que no existe en WORKING-STORAGE","Nombre de columna inexistente en el contexto","Campo con scope incorrecto en programas modulares"],solutions:["Verificar que la variable host está en la WORKING-STORAGE","Comprobar el nombre exacto de la columna en SYSCAT.COLUMNS"],example:`01 WS-VARIABLES-DB2.
+   05 WS-EMP-ID      PIC S9(9) COMP.
+   05 WS-EMP-NOMBRE  PIC X(50).
+   05 WS-EMP-SALARIO PIC S9(7)V9(2) COMP-3.
+
+EXEC SQL
+  SELECT id, nombre, salario
+  INTO :WS-EMP-ID, :WS-EMP-NOMBRE, :WS-EMP-SALARIO
+  FROM empleados WHERE id = :WS-EMP-ID
+END-EXEC.`},
+  {code:'SQLCODE -313',name:'Número de parámetros distinto al de campos',severity:'error',cat:'syntax',desc:'El número de campos especificados no es el mismo que el de parámetros marcados (?).',causes:["Más o menos marcadores ? que columnas en INSERT dinámico","Lista de columnas que no coincide con parámetros de EXECUTE USING"],solutions:["Contar y alinear número de columnas con número de parámetros ?","Verificar que USING tiene tantas variables como columnas"],example:`MOVE 'INSERT INTO emp (id, nombre, salario)
+      VALUES (?, ?, ?)' TO WS-SQL.
+
+* EXECUTE con exactamente 3 variables:
+EXEC SQL EXECUTE STMT1
+  USING :WS-ID, :WS-NOMBRE, :WS-SALARIO
+END-EXEC.`},
+  {code:'SQLCODE -314',name:'Referencia ambigua a variable host',severity:'error',cat:'syntax',desc:'La sentencia contiene una referencia ambigua a una variable de host.',causes:["Variable host con mismo nombre en diferentes niveles COBOL","Nombre de variable ambiguo que puede referirse a más de un campo"],solutions:["Usar nombres únicos para todas las variables host","Usar variables elementales, no de grupo, como variables host"],example:`* COBOL: evitar nombres ambiguos
+* CORRECTO: nombres únicos
+01 WS-EMP-ID    PIC S9(9) COMP.
+01 WS-DEPT-ID   PIC S9(9) COMP.
+
+EXEC SQL
+  SELECT e.id, d.id
+  INTO :WS-EMP-ID, :WS-DEPT-ID
+  FROM empleados e JOIN departamentos d
+    ON e.dept_id = d.id
+END-EXEC.`},
+  {code:'SQLCODE -401',name:'Operandos aritméticos no comparables',severity:'error',cat:'data',desc:'Operandos no comparables entre sí. También al seleccionar campo inexistente, o al ver orden de campos en DECLARE vs FETCH.',causes:["Comparar tipos numéricos con alfanuméricos","Campo que no existe en la tabla","Orden incorrecto de campos en DECLARE vs FETCH"],solutions:["Usar CAST() para convertir tipos antes de comparar","Verificar que todos los campos del SELECT existen en la tabla"],example:`-- Correcto: tipos compatibles
+WHERE id = :WS-ID-NUM        -- numerico = numerico
+WHERE nombre = :WS-NOMBRE    -- char = char
+
+-- Conversion si es necesario
+WHERE CHAR(id) = :WS-ID-CHAR`},
+  {code:'SQLCODE -402',name:'Función aritmética sobre datos de carácter',severity:'error',cat:'data',desc:'Una función aritmética o operador se aplica a datos de carácter. También puede requerir cambiar parámetro GENBAT de I1 a IA.',causes:["Operación aritmética sobre columna de tipo carácter","SUM, AVG sobre columna VARCHAR o CHAR"],solutions:["Convertir el valor a numérico con CAST antes de la operación","Verificar que las columnas de operaciones aritméticas son numéricas"],example:`-- Correcto: convertir a numérico
+SELECT SUM(CAST(cod_str AS DECIMAL(9,2)))
+FROM tabla
+WHERE TRANSLATE(cod_str,'','0123456789.')='';`},
+  {code:'SQLCODE -404',name:'Cadena de caracteres demasiado larga en INSERT/UPDATE',severity:'error',cat:'data',desc:'Una cadena de caracteres en INSERT o UPDATE es demasiado larga para la columna destino.',causes:["Texto más largo que el VARCHAR(n) de la columna","Datos importados que superan el tamaño de la columna","Concatenación que produce resultado más largo que la columna"],solutions:["Ampliar la columna con ALTER TABLE","Truncar con SUBSTR antes del INSERT/UPDATE","Usar CLOB para columnas con texto muy largo"],example:`-- Truncar para que quepa en la columna
+INSERT INTO notas (texto)
+VALUES (SUBSTR(:WS-TEXTO, 1, 200));
+
+-- Ampliar la columna
+ALTER TABLE notas
+ALTER COLUMN texto SET DATA TYPE VARCHAR(2000);`},
+  {code:'SQLCODE -405',name:'Literal numérico fuera de rango',severity:'error',cat:'data',desc:'Literal numérico fuera de rango, o al abrir CURSOR con valores alfanuméricos en campos numéricos COMP-3.',causes:["Literal numérico que supera el rango del tipo","Variable alfanumérica pasada a campo numérico COMP-3"],solutions:["Usar el tipo de dato correcto para la columna","Convertir el valor al tipo correcto antes de la asignación"],example:`* Tipo correcto para campo DECIMAL
+* Columna DB2: DECIMAL(9,2)
+* INCORRECTO: alfanumerico
+* MOVE '123.45' TO WS-IMPORTE-ALPHA
+
+* CORRECTO: COMP-3
+01 WS-IMPORTE  PIC S9(7)V9(2) COMP-3.
+MOVE 123.45 TO WS-IMPORTE.`},
+  {code:'SQLCODE -406',name:'Valor calculado fuera de rango',severity:'error',cat:'data',desc:'Un valor calculado o derivado de instrucción SQL está fuera del rango o de la descripción del campo destino.',causes:["Resultado de cálculo que excede la precisión de la columna","Desbordamiento en operación aritmética SQL"],solutions:["Ampliar la precisión de la columna destino","Usar ROUND() o TRUNCATE() para controlar los decimales"],example:`-- Controlar decimales en cálculo
+SELECT ROUND(salario * 1.15, 2) AS nuevo_salario
+FROM empleados;
+
+-- Ampliar precision para resultado grande
+SELECT CAST(salario * factor AS DECIMAL(15,2))
+FROM empleados;`},
+  {code:'SQLCODE -407',name:'NULL en columna NOT NULL',severity:'error',cat:'integrity',desc:'Se intenta insertar un valor nulo en un campo con atributo NOT NULL.',causes:["Campo obligatorio omitido en la lista de columnas del INSERT","Variable host con indicador negativo en columna NOT NULL","Función que devuelve NULL para columna obligatoria"],solutions:["Proporcionar valor explícito para todas las columnas NOT NULL","Definir DEFAULT en la columna si aplica","Usar COALESCE() para garantizar un valor no nulo"],example:`-- Ver columnas NOT NULL
+SELECT COLNAME, NULLS, DEFAULT
+FROM SYSCAT.COLUMNS
+WHERE TABNAME='EMPLEADOS' AND NULLS='N'
+ORDER BY COLNO;
+
+-- Añadir DEFAULT
+ALTER TABLE empleados
+ALTER COLUMN email SET DEFAULT 'pendiente@emp.com';`},
+  {code:'SQLCODE -408',name:'Valor de INSERT/UPDATE incompatible con columna',severity:'error',cat:'data',desc:'El valor de un INSERT o UPDATE no es del mismo tipo que la columna.',causes:["Valor numérico en columna alfanumérica o viceversa","Tipos incompatibles entre valor y columna"],solutions:["Usar CAST() para convertir al tipo de la columna","Verificar el tipo de cada columna con SYSCAT.COLUMNS"],example:`-- Verificar tipos de columna
+SELECT COLNAME, TYPENAME
+FROM SYSCAT.COLUMNS
+WHERE TABNAME='EMPLEADOS';
+
+-- Conversion explicita
+INSERT INTO log_ev (codigo)
+VALUES (CAST(:WS-CODIGO-NUM AS CHAR(10)));`},
+  {code:'SQLCODE -409',name:'Operador inválido en función COUNT',severity:'error',cat:'syntax',desc:'Operador inválido dentro de la función COUNT.',causes:["Uso de operador aritmético dentro de COUNT","Expresión compleja no permitida dentro de COUNT"],solutions:["Usar COUNT(*) para contar todas las filas","Usar COUNT(columna) para contar valores no nulos"],example:`-- Formas correctas de COUNT
+SELECT COUNT(*) AS total_filas,
+       COUNT(email) AS con_email,
+       COUNT(DISTINCT dept_id) AS num_depts
+FROM empleados
+WHERE activo = 'S';`},
+  {code:'SQLCODE -412',name:'Subconsulta devuelve múltiples columnas',severity:'error',cat:'syntax',desc:'La cláusula SELECT de una SUBSELECT especifica múltiples columnas cuando solo se permite una.',causes:["Subconsulta en WHERE que devuelve múltiples columnas","Uso de subconsulta escalar que devuelve más de una columna"],solutions:["La subconsulta escalar debe devolver exactamente una columna","Seleccionar solo la columna necesaria en la subconsulta"],example:`-- INCORRECTO
+-- WHERE id IN (SELECT id, nombre FROM dept)
+
+-- CORRECTO: subconsulta con una sola columna
+WHERE dept_id IN (
+  SELECT id FROM departamentos
+  WHERE zona = 'NORTE'
+);`},
+  {code:'SQLCODE -413',name:'Desbordamiento numérico en conversión',severity:'error',cat:'data',desc:'OVERFLOW durante la conversión de tipos de datos o en operación aritmética.',causes:["Multiplicación o suma que supera el máximo de DECIMAL(p,s)","División que produce más decimales de los permitidos"],solutions:["Usar tipo de dato más amplio: DECIMAL(15,2) en vez de DECIMAL(9,2)","Añadir control de rango en la lógica"],example:`-- Ampliar precisión
+ALTER TABLE ventas
+ALTER COLUMN total SET DATA TYPE DECIMAL(18,2);
+
+SELECT SUM(CAST(importe AS DECIMAL(18,2)))
+FROM transacciones
+WHERE fecha = CURRENT DATE;`},
+  {code:'SQLCODE -414',name:'LIKE con campo numérico',severity:'error',cat:'syntax',desc:'Campo numérico especificado al utilizar LIKE. LIKE solo funciona con tipos cadena.',causes:["LIKE directamente sobre columna INT, DECIMAL o DATE","Olvidar convertir la columna numérica a CHAR"],solutions:["Usar CHAR(columna) o CAST(columna AS CHAR) antes del LIKE","Para números, usar = o BETWEEN en lugar de LIKE"],example:`-- INCORRECTO
+-- WHERE id LIKE '%5'
+
+-- CORRECTO
+WHERE CHAR(id) LIKE '%5';
+
+-- Para fechas:
+WHERE YEAR(fecha) = 2024;
+-- O: WHERE CHAR(fecha) LIKE '2024%';`},
+  {code:'SQLCODE -415',name:'Columnas de UNION con descripciones diferentes',severity:'error',cat:'syntax',desc:'Las columnas correspondientes en los operandos de un UNION no tienen las mismas descripciones de campo.',causes:["Columnas en las dos partes del UNION con tipos diferentes","Longitudes de columnas diferentes entre las partes del UNION"],solutions:["Usar CAST() para homogeneizar los tipos en ambas partes del UNION"],example:`-- CORRECTO: tipos homogeneizados con CAST
+SELECT CAST(id AS CHAR(10)) AS clave, nombre
+FROM empleados_activos
+UNION
+SELECT CAST(id AS CHAR(10)) AS clave, nombre
+FROM empleados_historico;`},
+  {code:'SQLCODE -418',name:'Parámetro marcado en SELECT / tipo indeterminado',severity:'error',cat:'syntax',desc:'La sentencia a preparar incluye parámetros en una cláusula SELECT donde DB2 no puede determinar el tipo.',causes:["Marcador ? en cláusula SELECT sin contexto de tipo","DB2 no puede inferir el tipo del parámetro en SELECT"],solutions:["Usar CAST(? AS tipo) para especificar el tipo del parámetro","Usar variables host tipadas en lugar de marcadores ?"],example:`-- INCORRECTO: ? en SELECT sin tipo
+-- PREPARE stmt FROM 'SELECT ? FROM tabla'
+
+-- CORRECTO: especificar tipo con CAST
+PREPARE stmt FROM
+  'SELECT * FROM tabla WHERE id = CAST(? AS INTEGER)';`},
+  {code:'SQLCODE -419',name:'División decimal con resultado negativo',severity:'error',cat:'data',desc:'El resultado de una división decimal es negativo o produce desbordamiento.',causes:["División que produce resultado negativo no representable","Desbordamiento en división decimal"],solutions:["Verificar los rangos de los tipos DECIMAL antes de dividir","Usar DECIMAL con mayor precisión para el resultado"],example:`-- Verificar antes de dividir
+SELECT CASE
+  WHEN denominador = 0 THEN NULL
+  ELSE CAST(numerador AS DECIMAL(15,4))
+       / CAST(denominador AS DECIMAL(15,4))
+END AS resultado
+FROM tabla;`},
+  {code:'SQLCODE -421',name:'Operandos de UNION con diferente número de campos',severity:'error',cat:'syntax',desc:'Los operandos de una UNION no tienen el mismo número de campos.',causes:["Primera parte del UNION con más columnas que la segunda","Columna añadida en una parte sin añadirla en la otra"],solutions:["Asegurar que ambas partes del UNION tienen exactamente el mismo número de columnas","Añadir columnas dummy (NULL AS col_nombre) para igualar el número"],example:`-- Igualar número de columnas con NULL
+SELECT id, nombre, salario
+FROM empleados_activos
+UNION
+SELECT id, nombre, NULL AS salario
+FROM candidatos;`},
+  {code:'SQLCODE -501',name:'Cursor no está abierto en FETCH/CLOSE',severity:'error',cat:'cursor',desc:'FETCH o CLOSE sobre cursor que no está abierto. También si el cursor fue cerrado automáticamente tras COMMIT sin WITH HOLD.',causes:["FETCH sin previo OPEN","Cursor cerrado automáticamente tras COMMIT sin WITH HOLD","FETCH después de recibir +100"],solutions:["Verificar que OPEN precede siempre a FETCH","Declarar cursor WITH HOLD si debe sobrevivir a COMMIT"],example:`EXEC SQL DECLARE C1 CURSOR WITH HOLD FOR
+  SELECT id, nombre FROM empleados
+END-EXEC.
+EXEC SQL OPEN C1 END-EXEC.
+PERFORM UNTIL SQLCODE = 100
+  EXEC SQL FETCH C1 INTO :WS-ID,:WS-NOM END-EXEC
+  IF SQLCODE = 0
+    PERFORM PROCESS-ROW
+  END-IF
+END-PERFORM.
+EXEC SQL CLOSE C1 END-EXEC.`},
+  {code:'SQLCODE -502',name:'OPEN sobre cursor ya abierto',severity:'error',cat:'cursor',desc:'OPEN sobre un cursor que ya se encuentra abierto.',causes:["OPEN ejecutado dos veces sin CLOSE intermedio","Bucle con OPEN dentro sin cerrar en cada iteración"],solutions:["Cerrar siempre el cursor con CLOSE antes de un nuevo OPEN","Verificar estado con variable de control"],example:`IF WS-CURSOR-OPEN = 'S'
+  EXEC SQL CLOSE C1 END-EXEC
+  MOVE 'N' TO WS-CURSOR-OPEN
+END-IF.
+
+EXEC SQL OPEN C1 END-EXEC.
+MOVE 'S' TO WS-CURSOR-OPEN.`},
+  {code:'SQLCODE -503',name:'Campo no actualizable por no estar en FOR UPDATE / falta GENBAT DB2',severity:'error',cat:'cursor',desc:'Campo no puede ser actualizado por no estar identificado en el FOR UPDATE OF. También al hacer GENBAT sin especificar DB2.',causes:["Campo en el SET del UPDATE no declarado en FOR UPDATE OF","Hacer GENBAT del programa tipo I1 (sin DB2) cuando es DB2"],solutions:["Añadir el campo a la cláusula FOR UPDATE OF en el DECLARE","Generar el GENBAT del programa como tipo DB2 (IA en vez de I1)"],example:`-- DECLARE correcto
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, salario, categoria
+  FROM empleados
+  FOR UPDATE OF salario, categoria  -- listar todos los campos a actualizar
+END-EXEC.`},
+  {code:'SQLCODE -504',name:'Nombre de cursor no definido',severity:'error',cat:'cursor',desc:'El nombre de cursor usado en OPEN, FETCH o CLOSE no ha sido declarado con DECLARE CURSOR.',causes:["Nombre de cursor con typo en OPEN/FETCH/CLOSE","DECLARE CURSOR omitido","Cursor declarado en sección no accesible"],solutions:["Añadir DECLARE CURSOR con el nombre exacto","Verificar ortografía en todas las referencias"],example:`EXEC SQL
+  DECLARE CURSOR_EMPLEADOS CURSOR FOR
+    SELECT id, nombre, salario
+    FROM empleados
+    WHERE activo = 'S'
+    ORDER BY nombre
+END-EXEC.
+
+-- Usar el mismo nombre exacto:
+EXEC SQL OPEN CURSOR_EMPLEADOS END-EXEC.`},
+  {code:'SQLCODE -507',name:'UPDATE/DELETE sin abrir el cursor',severity:'error',cat:'cursor',desc:'Intento de UPDATE o DELETE sin haber abierto el cursor previamente.',causes:["UPDATE WHERE CURRENT OF sobre cursor no abierto","DELETE WHERE CURRENT OF antes del OPEN","Flujo que omite el OPEN del cursor"],solutions:["Asegurar que la secuencia es: OPEN -> FETCH -> UPDATE/DELETE -> CLOSE"],example:`* Secuencia obligatoria
+EXEC SQL OPEN C1 END-EXEC.
+EXEC SQL FETCH C1 INTO :WS-ID END-EXEC.
+IF SQLCODE = 0
+  EXEC SQL
+    UPDATE empleados SET activo='N'
+    WHERE CURRENT OF C1
+  END-EXEC
+END-IF.
+EXEC SQL CLOSE C1 END-EXEC.`},
+  {code:'SQLCODE -508',name:'UPDATE/DELETE sin cursor posicionado',severity:'error',cat:'cursor',desc:'Intento de UPDATE o DELETE sin estar el cursor posicionado en ninguna fila.',causes:["OPEN seguido de UPDATE sin hacer FETCH primero","Cursor que llegó al final (+100) y luego se intenta modificar"],solutions:["Siempre hacer FETCH después de OPEN antes de UPDATE/DELETE","Verificar SQLCODE = 0 del FETCH antes de modificar"],example:`EXEC SQL OPEN C1 END-EXEC.
+EXEC SQL FETCH C1 INTO :WS-ID, :WS-SAL END-EXEC.
+IF SQLCODE = 0  -- Solo si hay fila válida
+  EXEC SQL
+    UPDATE empleados SET salario = :WS-NSAL
+    WHERE CURRENT OF C1
+  END-EXEC
+END-IF.`},
+  {code:'SQLCODE -509',name:'Tabla en UPDATE/DELETE diferente a la del cursor',severity:'error',cat:'cursor',desc:'La tabla especificada en UPDATE o DELETE no es la misma que la designada en el CURSOR.',causes:["UPDATE sobre tabla diferente a la del CURSOR","Error tipográfico en el nombre de tabla del UPDATE"],solutions:["Verificar que la tabla en UPDATE/DELETE coincide exactamente con la del CURSOR"],example:`-- DECLARE y UPDATE deben referenciar la misma tabla
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, salario FROM empleados   -- tabla: empleados
+END-EXEC.
+
+-- CORRECTO: misma tabla
+EXEC SQL
+  UPDATE empleados SET salario = :WS-SAL
+  WHERE CURRENT OF C1
+END-EXEC.`},
+  {code:'SQLCODE -510',name:'Tabla de cursor no puede ser modificada',severity:'error',cat:'cursor',desc:'Tabla de cursor no puede ser modificada. También al modificar cursor sin poner FOR UPDATE OF, que MICROFOCUS no detecta pero falla en HOST.',causes:["Vista o tabla de solo lectura en el CURSOR","Falta FOR UPDATE OF en el DECLARE del CURSOR"],solutions:["Añadir FOR UPDATE OF campo en el DECLARE","Verificar que la tabla no es de solo lectura"],example:`-- DECLARE con FOR UPDATE OF
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, salario
+  FROM empleados
+  WHERE dept = :WS-DEPT
+  FOR UPDATE OF salario  -- OBLIGATORIO para poder actualizar
+END-EXEC.`},
+  {code:'SQLCODE -514',name:'Cursor no preparado',severity:'error',cat:'cursor',desc:'El cursor no está preparado porque la sentencia dinámica no se ha ejecutado con PREPARE.',causes:["OPEN antes del PREPARE correspondiente","Nombre de sentencia en DECLARE diferente al del PREPARE"],solutions:["Ejecutar PREPARE antes de OPEN en SQL dinámico","Verificar que el nombre de sentencia es idéntico en DECLARE, PREPARE y OPEN"],example:`MOVE 'SELECT id, nombre FROM empleados
+       WHERE dept = ?' TO WS-SQL.
+
+EXEC SQL PREPARE STMT1 FROM :WS-SQL END-EXEC.
+IF SQLCODE = 0
+  EXEC SQL DECLARE C1 CURSOR FOR STMT1 END-EXEC
+  EXEC SQL OPEN C1 USING :WS-DEPT END-EXEC
+END-IF.`},
+  {code:'SQLCODE -516',name:'DESCRIBE sobre sentencia no preparada',severity:'error',cat:'cursor',desc:'Se ejecuta DESCRIBE sobre una sentencia que no ha sido preparada con PREPARE.',causes:["DESCRIBE antes de PREPARE","Nombre de sentencia incorrecto en DESCRIBE"],solutions:["Ejecutar PREPARE exitosamente antes de DESCRIBE","Usar el mismo nombre en PREPARE y DESCRIBE"],example:`EXEC SQL PREPARE STMT_DYN FROM :WS-QUERY END-EXEC.
+IF SQLCODE = 0
+  EXEC SQL DESCRIBE STMT_DYN INTO :SQLDA END-EXEC
+ELSE
+  PERFORM HANDLE-PREPARE-ERROR
+END-IF.`},
+  {code:'SQLCODE -518',name:'Sentencia ejecutada no es SELECT válida',severity:'error',cat:'cursor',desc:'La sentencia ejecutada no es una sentencia SELECT válida para el cursor.',causes:["PREPARE de sentencia no SELECT para CURSOR","Sentencia expirada tras desconexión","Nombre de sentencia diferente entre DECLARE y PREPARE"],solutions:["Preparar en cada nueva conexión o unidad de trabajo","Verificar SQLCODE = 0 del PREPARE antes del OPEN"],example:`* Preparar en cada transacción
+EXEC SQL PREPARE S1 FROM :WS-STMT END-EXEC.
+EVALUATE SQLCODE
+  WHEN 0    CONTINUE
+  WHEN OTHER PERFORM ERROR-PREPARE
+END-EVALUATE.
+EXEC SQL OPEN C1 END-EXEC.`},
+  {code:'SQLCODE -530',name:'FK — fila padre no existe',severity:'error',cat:'integrity',desc:'INSERT o UPDATE en tabla hija con FK cuyo valor no existe en la tabla padre. La integridad referencial no se cumple.',causes:["Insertar en tabla hija un ID inexistente en la tabla padre","Orden incorrecto de inserciones en carga de datos"],solutions:["Insertar primero en la tabla padre, luego en la hija","Verificar existencia del padre con SELECT antes de insertar"],example:`-- Verificar existencia del padre
+SELECT COUNT(*) INTO :WS-CNT
+FROM departamentos WHERE id = :WS-DEPT-ID;
+
+IF WS-CNT > 0
+  INSERT INTO empleados (nombre, dept_id)
+  VALUES (:WS-NOM, :WS-DEPT-ID)
+ELSE
+  PERFORM DEPT-NO-ENCONTRADO
+END-IF.`},
+  {code:'SQLCODE -531',name:'FK — DELETE viola clave padre',severity:'error',cat:'integrity',desc:'No se puede eliminar fila padre porque existen filas hijas que la referencian.',causes:["DELETE en tabla padre con registros hijos activos","FK sin ON DELETE CASCADE"],solutions:["Eliminar primero los registros hijos, luego el padre","Definir ON DELETE CASCADE si la eliminación en cascada es apropiada"],example:`-- Orden correcto de eliminación
+DELETE FROM pedido_lineas WHERE pedido_id = :WS-ID;
+DELETE FROM pedidos      WHERE id = :WS-ID;
+
+-- O con CASCADE en la FK:
+ALTER TABLE pedido_lineas
+  ADD CONSTRAINT fk_pedido
+  FOREIGN KEY (pedido_id) REFERENCES pedidos(id)
+  ON DELETE CASCADE;`},
+  {code:'SQLCODE -532',name:'FK — UPDATE viola clave padre',severity:'error',cat:'integrity',desc:'No se puede actualizar la clave primaria de una fila padre porque existen filas hijas que la referencian.',causes:["UPDATE de clave primaria con hijos dependientes","FK sin ON UPDATE CASCADE"],solutions:["Actualizar primero las filas hijas con el nuevo valor","Usar ON UPDATE CASCADE si la actualización en cascada es apropiada"],example:`-- Actualizar hijo primero, luego el padre
+UPDATE empleados SET dept_id = :NUEVO_ID
+WHERE dept_id = :VIEJO_ID;
+
+UPDATE departamentos SET id = :NUEVO_ID
+WHERE id = :VIEJO_ID;`},
+  {code:'SQLCODE -534',name:'Clave primaria no actualizable en UPDATE múltiple',severity:'error',cat:'integrity',desc:'La CLAVE PRIMARIA no puede actualizarse a causa de una actualización de múltiples filas.',causes:["UPDATE sobre múltiples filas que afecta a la PRIMARY KEY","Actualización masiva de PK que viola unicidad"],solutions:["No actualizar la PRIMARY KEY directamente en actualizaciones masivas","Si es necesario cambiar PKs, hacerlo fila a fila"],example:`-- Actualizar PK solo fila a fila con control
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id FROM tabla_a_actualizar
+END-EXEC.
+-- En el bucle: UPDATE ... WHERE id = :WS-OLD-ID`},
+  {code:'SQLCODE -535',name:'Campo clave e índice único en UPDATE de cursor',severity:'error',cat:'cursor',desc:'En un UPDATE con CURSOR no se pueden poner en el SET campos que son CLAVE e ÍNDICE ÚNICO.',causes:["Intento de actualizar la PRIMARY KEY usando UPDATE WHERE CURRENT OF","Campo de índice único incluido en el SET del UPDATE de cursor"],solutions:["Excluir los campos de clave primaria del SET en UPDATE de cursor","Si necesita cambiar la clave, usar DELETE + INSERT"],example:`-- DECLARE excluyendo la PK
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, nombre, salario
+  FROM empleados
+  FOR UPDATE OF nombre, salario  -- No incluir id (PK)
+END-EXEC.
+
+-- UPDATE posicionado sin tocar la PK
+EXEC SQL
+  UPDATE empleados
+  SET salario = :WS-SAL  -- No actualizar id
+  WHERE CURRENT OF C1
+END-EXEC.`},
+  {code:'SQLCODE -537',name:'PK o FK identifica la columna más de una vez',severity:'error',cat:'integrity',desc:'La CLAVE PRIMARIA O FORÁNEA identifica la misma columna más de una vez.',causes:["Columna repetida en la definición de PRIMARY KEY","Mismo campo listado dos veces en la FOREIGN KEY"],solutions:["Eliminar la columna duplicada de la definición de PK/FK","Cada columna debe aparecer solo una vez en la clave"],example:`-- INCORRECTO: columna duplicada en PK
+-- PRIMARY KEY (id, nombre, id)  => -537
+
+-- CORRECTO
+CREATE TABLE pedidos (
+  pedido_id INTEGER NOT NULL,
+  linea_id  INTEGER NOT NULL,
+  PRIMARY KEY (pedido_id, linea_id)  -- sin duplicados
+);`},
+  {code:'SQLCODE -538',name:'FK no se corresponde con PK de la tabla madre',severity:'error',cat:'integrity',desc:'La CLAVE FORÁNEA no se corresponde con la descripción de la CLAVE PRIMARIA de la tabla referenciada.',causes:["FK con tipos diferentes a los de la PK de la tabla padre","FK con número diferente de columnas que la PK padre"],solutions:["Verificar que la FK tiene los mismos tipos y número de columnas que la PK referenciada"],example:`-- PK padre: (id INTEGER)
+-- FK hija debe ser INTEGER también
+CREATE TABLE empleados (
+  id      INTEGER NOT NULL,
+  dept_id INTEGER,  -- mismo tipo que departamentos.id
+  FOREIGN KEY (dept_id)
+    REFERENCES departamentos(id)
+);`},
+  {code:'SQLCODE -539',name:'PRIMARY KEY debe estar en la tabla madre',severity:'error',cat:'integrity',desc:'La cláusula PRIMARY KEY tiene que estar definida en la tabla madre.',causes:["Tabla referenciada por FK sin tener PRIMARY KEY definida","Intento de crear FK que referencia tabla sin PK"],solutions:["Definir PRIMARY KEY en la tabla padre antes de crear la FK en la tabla hija"],example:`-- Orden correcto: PK primero, luego FK
+CREATE TABLE departamentos (
+  id   INTEGER NOT NULL,
+  nombre VARCHAR(50),
+  PRIMARY KEY (id)  -- PK en la tabla padre primero
+);
+
+CREATE TABLE empleados (
+  id      INTEGER NOT NULL,
+  dept_id INTEGER,
+  PRIMARY KEY (id),
+  FOREIGN KEY (dept_id) REFERENCES departamentos(id)
+);`},
+  {code:'SQLCODE -540',name:'TABLA REFERENCIAL: hijo creado antes que madre',severity:'error',cat:'integrity',desc:'La CLAVE MIGRADA desde la tabla madre debe ser íntegra. También cuando en tabla referencial se creó el hijo antes que la madre.',causes:["Tabla hija creada antes que la tabla madre referenciada","Columna de FK nula cuando no debería serlo"],solutions:["Crear siempre la tabla padre antes que la tabla hija","Revisar el orden de los scripts DDL"],example:`-- Orden correcto de creación
+-- 1. Crear tabla padre
+CREATE TABLE paises (codigo CHAR(3) NOT NULL PRIMARY KEY, ...);
+-- 2. Crear tabla hija
+CREATE TABLE ciudades (
+  id INTEGER NOT NULL PRIMARY KEY,
+  pais_cod CHAR(3),
+  FOREIGN KEY (pais_cod) REFERENCES paises(codigo)
+);`},
+  {code:'SQLCODE -542',name:'Columna con NULL no puede ser clave primaria',severity:'error',cat:'integrity',desc:'La columna no puede ser columna de la CLAVE PRIMARIA porque puede contener valores nulos.',causes:["Columna definida sin NOT NULL incluida en la PRIMARY KEY","Intento de añadir columna anulable a una PK existente"],solutions:["Definir todas las columnas de la PK con NOT NULL","Añadir NOT NULL a la columna antes de incluirla en la PK"],example:`-- CORRECTO: todas las columnas PK son NOT NULL
+CREATE TABLE pedidos (
+  pedido_id INTEGER NOT NULL,
+  linea_id  INTEGER NOT NULL,
+  PRIMARY KEY (pedido_id, linea_id)
+);
+
+-- Si la columna ya existe y es anulable:
+ALTER TABLE tabla ALTER COLUMN col SET NOT NULL;`},
+  {code:'SQLCODE -545',name:'Violación de restricción CHECK',severity:'error',cat:'integrity',desc:'El valor insertado o actualizado viola una restricción CHECK definida en la tabla.',causes:["Valor fuera del rango permitido por la CHECK","Combinación de valores que viola una CHECK multicolumna"],solutions:["Verificar las restricciones CHECK con SYSCAT.CHECKS","Asegurar que el valor cumple todas las condiciones CHECK"],example:`-- Ver restricciones CHECK
+SELECT CONSTNAME, TEXT
+FROM SYSCAT.CHECKS
+WHERE TABNAME = 'EMPLEADOS';
+
+-- Modificar restricción
+ALTER TABLE empleados DROP CHECK chk_salario;
+ALTER TABLE empleados
+  ADD CONSTRAINT chk_salario
+  CHECK (salario BETWEEN 0 AND 999999);`},
+  {code:'SQLCODE -551',name:'Autorización insuficiente sobre objeto',severity:'error',cat:'auth',desc:'El usuario no tiene privilegios para la operación sobre el objeto. También si el objeto no existe, está en READ ONLY, o el usuario no tiene autorización para crear con un AUTHORIZATION-ID concreto.',causes:["Usuario sin SELECT/INSERT/UPDATE/DELETE sobre la tabla","Objeto DB2 inexistente (aparece como error de autorización)","Objeto en estado READ ONLY"],solutions:["Otorgar privilegio: GRANT SELECT ON tabla TO usuario","Verificar que el objeto existe con SYSCAT.TABLES","Solicitar autorización al DBA"],example:`-- Ver privilegios del usuario
+SELECT GRANTEE, SELECTAUTH, INSERTAUTH,
+       UPDATEAUTH, DELETEAUTH
+FROM SYSCAT.TABAUTH
+WHERE TABNAME='EMPLEADOS';
+
+-- Otorgar privilegios (requiere DBADM)
+GRANT SELECT, INSERT ON TABLE mi_schema.empleados
+  TO USER mi_usuario;`},
+  {code:'SQLCODE -552',name:'Usuario sin privilegios para la operación',severity:'error',cat:'auth',desc:'El usuario no tiene privilegios para ejecutar la operación indicada.',causes:["Operación no autorizada (DDL, DML)","Falta de privilegio específico (CREATETAB, BINDADD)","Privilegio revocado recientemente"],solutions:["Otorgar el privilegio específico al usuario","Verificar privilegios con SYSCAT.DBAUTH","Solicitar al DBA los privilegios necesarios"],example:`-- Ver privilegios de base de datos del usuario
+SELECT GRANTEE, CREATETABAUTH, BINDADDAUTH,
+       CONNECTAUTH, DBADMAUTH
+FROM SYSCAT.DBAUTH
+WHERE GRANTEE = 'MI_USUARIO';`},
+  {code:'SQLCODE -562',name:'Sin privilegios para hacer el PLAN',severity:'error',cat:'auth',desc:'El usuario no tiene privilegios para compilar (hacer BIND del) PLAN.',causes:["Falta de privilegio BINDADD o BIND para el plan","Usuario sin autorización sobre los objetos referenciados"],solutions:["Hacer público el PLAN con GRANT PUBLIC","Otorgar BINDADD al usuario"],example:`/* Otorgar BINDADD al usuario */
+GRANT BINDADD ON DATABASE TO USER mi_usuario;
+
+/* Hacer el PLAN público */
+GRANT EXECUTE ON PLAN mi_plan TO PUBLIC;`},
+  {code:'SQLCODE -601',name:'Objeto ya existe con ese nombre',severity:'error',cat:'object',desc:'Se intenta crear algo (tabla, índice, espacio para tablas) que ya existe con ese nombre en el catálogo.',causes:["CREATE TABLE de tabla ya existente","CREATE INDEX con nombre duplicado","Ejecución repetida de script DDL sin DROP previo"],solutions:["Eliminar el objeto existente con DROP antes de recrearlo","Verificar existencia antes de crear"],example:`-- Verificar si existe antes de crear
+SELECT COUNT(*) INTO :WS-EXISTE
+FROM SYSCAT.TABLES
+WHERE TABNAME='NUEVA_TABLA'
+  AND TABSCHEMA='MI_SCHEMA';
+
+IF WS-EXISTE = 0
+  EXEC SQL CREATE TABLE nueva_tabla (...) END-EXEC
+END-IF.`},
+  {code:'SQLCODE -602',name:'Demasiados campos en creación de índice / nombre duplicado',severity:'error',cat:'object',desc:'Demasiados campos en la creación de un índice, o nombre de objeto duplicado en el esquema.',causes:["Índice con más columnas del límite permitido","Nombre de índice o restricción ya usado en el esquema"],solutions:["Reducir el número de columnas del índice","Usar nombres únicos para todos los objetos del esquema"],example:`-- Ver índices existentes
+SELECT INDNAME, TABNAME
+FROM SYSCAT.INDEXES
+WHERE INDSCHEMA='MI_SCHEMA'
+ORDER BY INDNAME;
+
+-- Crear índice con nombre único
+CREATE INDEX IDX_EMP_DEPT_2024
+  ON empleados (dept_id, fecha_alta);`},
+  {code:'SQLCODE -603',name:'No se puede crear índice único con duplicados existentes',severity:'error',cat:'integrity',desc:'No se puede crear un índice único porque ya existen filas con valores duplicados.',causes:["Datos con valores repetidos en la columna a indexar","Importación de datos sin validación de unicidad"],solutions:["Identificar duplicados con GROUP BY ... HAVING COUNT(*) > 1","Eliminar o corregir duplicados antes de crear el índice"],example:`SELECT email, COUNT(*) cnt
+FROM empleados
+GROUP BY email HAVING COUNT(*) > 1;
+
+DELETE FROM empleados
+WHERE id NOT IN (
+  SELECT MIN(id) FROM empleados GROUP BY email
+);
+CREATE UNIQUE INDEX IDX_EMP_EMAIL ON empleados(email);`},
+  {code:'SQLCODE -604',name:'Definición de columna con errores',severity:'error',cat:'object',desc:'La definición de una columna tiene errores en su longitud, precisión o atributos.',causes:["DECIMAL con escala mayor que la precisión","VARCHAR con longitud 0 o negativa"],solutions:["Verificar que la precisión de DECIMAL es >= la escala","Usar longitudes positivas para VARCHAR/CHAR"],example:`-- DECIMAL(p,s): s debe ser <= p
+-- INCORRECTO: DECIMAL(3,5)
+-- CORRECTO:
+CREATE TABLE precios (
+  precio DECIMAL(10,2),  -- precision 10, escala 2
+  tasa   DECIMAL(5,4)   -- precision 5, escala 4
+);`},
+  {code:'SQLCODE -607',name:'Operación inválida sobre objeto del sistema',severity:'error',cat:'object',desc:'La operación no está definida para las tablas del sistema DB2.',causes:["Intentar DROP o ALTER sobre tablas de SYSCAT","Acceso de escritura a tablas del catálogo del sistema"],solutions:["No modificar directamente las tablas del catálogo SYSCAT","Contactar al DBA para operaciones sobre objetos del sistema"],example:`-- Solo consultas sobre el catálogo (nunca modificar)
+SELECT TABNAME, CARD, NPAGES
+FROM SYSCAT.TABLES
+WHERE TABSCHEMA = 'MI_SCHEMA';
+
+-- NUNCA:
+-- DELETE FROM SYSCAT.TABLES WHERE ...
+-- UPDATE SYSCAT.COLUMNS SET ...`},
+  {code:'SQLCODE -612',name:'Nombre de columna duplicado / operación ALTER inválida',severity:'error',cat:'object',desc:'Nombre de columna duplicado en la definición de la tabla, o la operación ALTER TABLE no está permitida para el estado actual del objeto.',causes:["Dos columnas con el mismo nombre en CREATE TABLE","Intentar cambiar tipo a uno incompatible","ALTER sobre columna que es parte de índice activo"],solutions:["Verificar que todos los nombres de columna son únicos","Crear nueva columna, migrar datos, eliminar la antigua"],example:`-- Cambiar tipo de columna: estrategia segura
+-- 1. Añadir nueva columna
+ALTER TABLE empleados ADD COLUMN sal_new DECIMAL(15,2);
+-- 2. Migrar datos
+UPDATE empleados SET sal_new = CAST(sal_old AS DECIMAL(15,2));
+-- 3. Eliminar columna antigua
+ALTER TABLE empleados DROP COLUMN sal_old;`},
+  {code:'SQLCODE -616',name:'Objeto referenciado por otro / no se puede borrar',severity:'error',cat:'object',desc:'Objeto no puede ser borrado porque es referenciado por otro objeto.',causes:["DROP de objeto referenciado por FK, vista o dependencia","DELETE en tabla padre con filas hijas activas"],solutions:["Identificar dependencias con SYSCAT.TABDEP o SYSCAT.REFERENCES","Eliminar o modificar los objetos dependientes primero"],example:`-- Identificar dependencias
+SELECT BNAME, BTYPE, DTYPE
+FROM SYSCAT.TABDEP
+WHERE TABNAME='MI_TABLA';
+
+-- Eliminar objetos dependientes primero
+DROP VIEW vista_dependiente;
+DROP TABLE mi_tabla;`},
+  {code:'SQLCODE -653',name:'Tabla en ESPACIO PARTICIONADO sin índice',severity:'error',cat:'object',desc:'La tabla en el espacio particionado no está disponible porque el índice correspondiente no ha sido creado.',causes:["Tabla en tablespace particionado sin índice de particionamiento","Índice eliminado de tabla particionada"],solutions:["Crear el índice de particionamiento antes de acceder a la tabla"],example:`-- Crear índice de particionamiento
+CREATE INDEX IDX_TABLA_PART
+  ON mi_tabla (clave_particion)
+  CLUSTER;
+
+-- Verificar índices de la tabla
+SELECT INDNAME, INDEXTYPE
+FROM SYSCAT.INDEXES
+WHERE TABNAME='MI_TABLA';`},
+  {code:'SQLCODE -666',name:'Recurso pendiente de utilidad (COPY PENDING)',severity:'error',cat:'system',desc:'Pendiente de una utilidad. Ej: COPY PENDING. Ejecutar START DATABASE para forzar el acceso.',causes:["Tabla con COPY PENDING después de carga sin COPY","RECOVER PENDING tras error de recuperación"],solutions:["Ejecutar COPY del tablespace para resolver COPY PENDING","START DATABASE(BD) SPACENAM(TS) ACCESS(FORCE)"],example:`/* Resolver COPY PENDING en z/OS */
+-DISPLAY DATABASE(MI_BD) SPACENAM(*) RESTRICT
+
+/* Si esta en COPY PENDING, ejecutar COPY: */
+//SYSIN DD *
+  COPY TABLESPACE MI_BD.MI_TS
+    COPYDDN(SYSREC)
+
+/* O forzar acceso: */
+-START DATABASE(MI_BD) SPACENAM(MI_TS) ACCESS(FORCE)`},
+  {code:'SQLCODE -680',name:'Demasiados campos para una tabla (CREATE)',severity:'error',cat:'object',desc:'Demasiados campos especificados para una tabla al ejecutar CREATE TABLE.',causes:["Más de 750 columnas en CREATE TABLE (z/OS) o más de 1012 (LUW)","Migración de tabla con exceso de columnas"],solutions:["Normalizar el diseño dividiendo en varias tablas","Revisar si todas las columnas son necesarias"],example:`-- Ver número de columnas de una tabla
+SELECT COUNT(*) FROM SYSCAT.COLUMNS
+WHERE TABNAME='MI_TABLA';
+-- Límite z/OS: 750 / LUW: 1012`},
+  {code:'SQLCODE -802',name:'OVERFLOW aritmético o división por cero',severity:'error',cat:'data',desc:'OVERFLOW aritmético o división por cero en la operación SQL.',causes:["División entre cero en expresión SQL","Resultado de operación aritmética que desborda el tipo","SUM o cálculo que supera el rango del tipo de dato"],solutions:["Verificar divisores antes de dividir","Usar NULLIF(denominador, 0) para evitar división por cero","Ampliar el tipo de dato para el resultado"],example:`-- Evitar división por cero
+SELECT numerador / NULLIF(denominador, 0) AS cociente
+FROM tabla;
+
+-- O con CASE
+SELECT CASE
+  WHEN denominador = 0 THEN NULL
+  ELSE CAST(numerador AS DECIMAL(15,4))
+       / CAST(denominador AS DECIMAL(15,4))
+END AS cociente
+FROM tabla;`},
+  {code:'SQLCODE -803',name:'Clave duplicada — violación de índice único',severity:'error',cat:'integrity',desc:'Inserción o actualización viola un índice único o PRIMARY KEY. También al modificar el índice único de una fila.',causes:["INSERT con valor ya existente en columna PK o UNIQUE","Carga masiva sin deduplicación previa","Race condition en inserciones concurrentes"],solutions:["Verificar existencia antes de INSERT con SELECT COUNT(*)","Usar MERGE para UPSERT","Añadir manejo de -803 para reintentar o redirigir"],example:`-- Verificar antes de insertar
+SELECT COUNT(*) INTO :WS-CNT FROM empleados
+WHERE email = :WS-EMAIL;
+IF WS-CNT = 0
+  INSERT INTO empleados (email, nombre)
+  VALUES (:WS-EMAIL, :WS-NOMBRE)
+ELSE
+  PERFORM DUPLICADO-HANDLER
+END-IF.
+
+-- O con MERGE
+MERGE INTO empleados AS t
+USING (VALUES (:WS-EMAIL,:WS-NOMBRE)) AS s(email,nombre)
+ON t.email = s.email
+WHEN NOT MATCHED THEN INSERT (email,nombre) VALUES (s.email, s.nombre);`},
+  {code:'SQLCODE -804',name:'Error en parámetros de entrada del programa',severity:'error',cat:'system',desc:'Error en los parámetros de entrada del programa para la instrucción SQL. Puede ocurrir por SQLCA machacada o falta de espacio en JCL.',causes:["Lectura de IMS con longitud mayor que la información enviada que machaca SQLCA","Falta espacio en JCL (razón 10): poner REGION=4M","Cambio en el procedimiento de compilación"],solutions:["Verificar la longitud de los segmentos IMS","Poner REGION=4M en el JCL si la razón es 10","Recompilar el programa tras cambio en el procedimiento de compilación"],example:`/* Aumentar REGION en JCL */
+//PASO1 EXEC PGM=MI_PGM,REGION=4M
+
+/* Verificar longitud de segmento IMS */
+/* La longitud del GET debe coincidir */
+/* con la longitud real del segmento  */`},
+  {code:'SQLCODE -805',name:'Paquete/módulo no encontrado en el PLAN',severity:'error',cat:'system',desc:'Nombre de programa o módulo no encontrado en el PLAN. Hay que dar nueva copia o compilar el PLAN.',causes:["Módulo no incluido en el paso BIND del JCL","Paquete eliminado o invalidado por cambio de esquema","BIND no actualizado tras modificación del programa"],solutions:["Dar nueva copia al programa y recompilar el PLAN","Verificar que el módulo está en el paso BIND del JCL","Ejecutar REBIND si el paquete fue invalidado por DDL"],example:`/* Verificar paquete en catálogo */
+SELECT NAME, COLLID, VERSION, VALID
+FROM SYSIBM.SYSPACKAGE
+WHERE NAME = 'MI_PROGRAMA';
+
+/* REBIND del paquete */
+REBIND PACKAGE(MI_COLECCION.MI_PROGRAMA)
+  VALIDATE(RUN);`},
+  {code:'SQLCODE -811',name:'SELECT INTO devuelve más de una fila',severity:'error',cat:'syntax',desc:'SELECT INTO o JOIN devuelve más de una fila cuando solo se espera una.',causes:["WHERE no identifica de forma unívoca una sola fila","Datos duplicados en columnas que deberían ser únicas","JOIN que multiplica las filas"],solutions:["Añadir condiciones más restrictivas al WHERE","Usar FETCH FIRST 1 ROW ONLY si solo se necesita un valor","Usar cursor explícito si se esperan múltiples filas"],example:`-- FETCH FIRST 1 ROW ONLY
+SELECT nombre INTO :WS-NOM
+FROM empleados
+WHERE dept = :WS-DEPT
+FETCH FIRST 1 ROW ONLY;
+
+-- O cursor para múltiples filas:
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT nombre FROM empleados
+  WHERE dept = :WS-DEPT
+END-EXEC.`},
+  {code:'SQLCODE -818',name:'Timestamps no coinciden — recompilar',severity:'error',cat:'system',desc:'No coinciden los TIMESTAMPS entre el módulo de carga y el DBRM/paquete. El programa necesita recompilación y rebind.',causes:["Programa recompilado sin hacer BIND del nuevo DBRM","BIND realizado sin actualizar el módulo de carga","Nombre del PLAN mal en el procedimiento de compilación"],solutions:["Volver a compilar el PLAN completo: precompile -> compile -> bind","Verificar que el nombre del PLAN es correcto en el procedimiento"],example:`/* Proceso completo de build DB2 */
+/* 1. Precompile: genera DBRM */
+DB2 PRECOMPILE programa.cbl BINDFILE
+/* 2. Compilar el fuente generado */
+COBC -x programa.cbl
+/* 3. BIND del DBRM generado */
+DB2 BIND programa.bnd
+/* 4. Solo entonces ejecutar */`},
+  {code:'SQLCODE -904',name:'Recurso no disponible',severity:'error',cat:'system',desc:'Recurso DB2 no disponible. El mensaje incluye el código de razón: COPY PENDING, DEADLOCK, TIMEOUT, espacio lleno, etc.',causes:["00C90081: tabla en disposición COPY tras LOAD","00C90088: DEADLOCK entre procesos","00C0008E: TIMEOUT","00D70014: espacio de disco agotado","00D70024: objeto en catálogo pero no en ficheros"],solutions:["REASON 00C90081: START DATABASE(...) ACCESS(FORCE)","REASON 00C90088: reintentar (DEADLOCK)","REASON 00D70014: liberar espacio en disco","REASON 00D70024: borrar y recrear la tabla"],example:`/* Resolver según el REASON CODE */
+
+/* COPY PENDING: */
+-START DATABASE(BTXXXXXX) SPACENAM(ETXXXXXX) ACCESS(FORCE)
+
+/* Ver proceso bloqueador (TIMEOUT) */
+/* Revisar SDSF de la tarea T005MSTR */
+
+/* Verificar espacio disco */
+D SMS,VOL=(*),STORGRP=(MI_GRUPO)`},
+  {code:'SQLCODE -905',name:'CPU limit excedido',severity:'error',cat:'system',desc:'La sentencia SQL ha excedido el tiempo límite de CPU. El proceso ha sido cancelado.',causes:["Sentencia SQL muy compleja sin índices adecuados","Consulta de escaneo completo de tabla grande","Falta de índices para los predicados de la WHERE"],solutions:["Simplificar la sentencia SQL","Crear índices para los campos usados en la WHERE","Estudiar el EXPLAIN de la sentencia para identificar mejoras"],example:`-- Ver plan de acceso con EXPLAIN
+EXPLAIN PLAN FOR
+  SELECT * FROM empleados
+  WHERE salario > 30000 AND activo = 'S';
+
+-- Crear índice si falta
+CREATE INDEX IDX_EMP_SAL
+  ON empleados (salario, activo);`},
+  {code:'SQLCODE -911',name:'Recurso bloqueado — ROLLBACK automático',severity:'error',cat:'system',desc:'La tabla está bloqueada por otro usuario. DB2 hizo ROLLBACK automático. Hay que volver a ejecutar la unidad de trabajo.',causes:["Tabla bloqueada por otro usuario","DEADLOCK o TIMEOUT que forzó el ROLLBACK","Bloqueo de nivel tabla o página"],solutions:["Reintentar la transacción completa tras el ROLLBACK","Acceder a tablas en el mismo orden para evitar deadlocks"],example:`01 WS-REINTENTOS     PIC 9 VALUE 0.
+01 WS-MAX-REINTENTOS PIC 9 VALUE 3.
+
+PERFORM UNTIL WS-REINTENTOS >= WS-MAX-REINTENTOS
+  EXEC SQL
+    UPDATE tabla SET col = :VAL WHERE id = :ID
+  END-EXEC
+  EVALUATE SQLCODE
+    WHEN 0
+      EXEC SQL COMMIT END-EXEC
+      MOVE 3 TO WS-REINTENTOS
+    WHEN -911
+      ADD 1 TO WS-REINTENTOS
+      EXEC SQL ROLLBACK END-EXEC
+    WHEN OTHER
+      PERFORM ERROR-HANDLER
+  END-EVALUATE
+END-PERFORM.`},
+  {code:'SQLCODE -913',name:'DEADLOCK — ejecución cancelada',severity:'error',cat:'system',desc:'Ejecución cancelada debido a un DEADLOCK o TIMEOUT. Hay que volver a ejecutar.',causes:["Transacciones que acceden a las mismas filas en orden inverso","Bloqueos acumulados sin COMMIT intermedio"],solutions:["Reintentar la transacción (implementar lógica de reintento)","Estandarizar el orden de acceso a tablas y filas en todos los programas","Hacer COMMIT más frecuente para liberar bloqueos"],example:`/* Regla de oro: acceder siempre al */
+/* mismo orden de tablas en todos   */
+/* los programas del sistema.       */
+
+/* Ejemplo: siempre TABLE_A antes que TABLE_B */
+
+/* Diagnóstico en DB2 z/OS */
+-START TRACE(PERFM) CLASS(3)
+-DISPLAY THREAD(*) DETAIL`},
+  {code:'SQLCODE -922',name:'Falta de autorización / PLAN sin compilar',severity:'error',cat:'auth',desc:'Falta de autorización. Hay que hacer público el PLAN o compilarlo. También si falta la ficha DB2 en JCL o si hace falta GRANT PUBLIC.',causes:["Usuario sin privilegios para la operación","PLAN no compilado o sin privilegios de ejecución","Falta la ficha DB2 en el JCL","No se ha ejecutado GRANT PUBLIC del plan"],solutions:["Hacer público el PLAN: GRANT EXECUTE ON PLAN mi_plan TO PUBLIC","Compilar el PLAN si no está compilado","Añadir la ficha DB2 al JCL de ejecución"],example:`/* Hacer público el plan */
+GRANT EXECUTE ON PLAN MI_PLAN TO PUBLIC;
+
+/* Ficha DB2 en JCL */
+//SYSTSIN DD *
+  DSN SYSTEM(DSN1)
+  RUN PROGRAM(MI_PGM) PLAN(MI_PLAN)
+/*`},
+  {code:'SQLCODE -923',name:'Conexión no establecida con DB2',severity:'error',cat:'system',desc:'Conexión no establecida con DB2. Puede ser por PLAN no compilado, falta de GRANT PUBLIC, o falta de ficha DB2 en el JCL.',causes:["PLAN no compilado o sin privilegios","Falta GRANT PUBLIC del plan","En JCL de ejecución falta la ficha DB2"],solutions:["Compilar el PLAN y dar GRANT PUBLIC","Añadir la ficha DB2 al JCL","Verificar que el subsistema DB2 está activo"],example:`/* Verificar estado del subsistema */
+-DISPLAY DDF
+
+/* Añadir ficha DB2 al JCL de ejecución */
+//SYSTSIN DD *
+  DSN SYSTEM(DSN1)
+  RUN PROGRAM(MI_PGM) PLAN(MI_PLAN)
+/*
+
+/* GRANT si falta autorización */
+GRANT EXECUTE ON PLAN MI_PLAN TO PUBLIC;`},
+  {code:'SQLCODE -924',name:'Problemas de conexión con DB2',severity:'error',cat:'system',desc:'Problemas de conexión con DB2: el subsistema DB2 se ha caído o no está activo.',causes:["Subsistema DB2 no iniciado en z/OS","Nombre de DB2 incorrecto en la cadena de conexión"],solutions:["Verificar que DB2 está activo: -DISPLAY DDF","Confirmar el nombre correcto del subsistema con el DBA"],example:`/* Comandos de operación z/OS */
+-DISPLAY DDF
+-DISPLAY THREAD(*)
+
+/* Si DB2 está caído, el operador debe: */
+-START DB2`},
+  {code:'SQLCODE -925',name:'COMMIT no válido en entorno IMS o CICS',severity:'error',cat:'system',desc:'COMMIT no válido en entorno IMS o CICS. El control de commit es del monitor de transacciones.',causes:["Ejecución de EXEC SQL COMMIT en programa IMS o CICS","Control de commit en código SQL que debe ser gestionado por el TP"],solutions:["En IMS: usar CHKP (checkpoint) en lugar de EXEC SQL COMMIT","En CICS: usar EXEC CICS SYNCPOINT","Eliminar los EXEC SQL COMMIT del código para entornos TP"],example:`* En IMS: usar CHKP para el commit
+CALL 'CBLTDLI' USING DLI-CHKP
+               WS-PCB-MASK
+               WS-CHKP-ID.
+
+* En CICS: usar EXEC CICS SYNCPOINT
+EXEC CICS SYNCPOINT END-EXEC.`},
+  {code:'SQLCODE -926',name:'ROLLBACK no válido en entorno IMS o CICS',severity:'error',cat:'system',desc:'ROLLBACK no válido en entorno IMS o CICS.',causes:["EXEC SQL ROLLBACK en programa IMS o CICS","Control de rollback que debe ser del monitor de transacciones"],solutions:["En IMS: usar ROLL o ROLB para el rollback","En CICS: usar EXEC CICS SYNCPOINT ROLLBACK"],example:`* En IMS: usar ROLB para rollback
+CALL 'CBLTDLI' USING DLI-ROLB
+               WS-PCB-MASK.
+
+* En CICS: usar EXEC CICS SYNCPOINT
+EXEC CICS SYNCPOINT ROLLBACK END-EXEC.`},
+  {code:'SQLCODE -927',name:'JCL batch sin fichas DB2',severity:'error',cat:'system',desc:'En ejecución BATCH con DB2 le faltan las fichas del DB2 en el JCL.',causes:["JCL de batch sin el paso o ficha de conexión a DB2","Pasos DB2 ausentes en el JCL"],solutions:["Añadir los pasos y fichas DB2 necesarios al JCL","Verificar el JCL modelo para programas DB2 en el sistema"],example:`/* JCL estándar para programa COBOL DB2 */
+//PASO1    EXEC PGM=IKJEFT01,REGION=4M
+//STEPLIB  DD DISP=SHR,DSN=DSN1.SDSNLOAD
+//SYSTSPRT DD SYSOUT=*
+//SYSTSIN  DD *
+  DSN SYSTEM(DSN1)
+  RUN PROGRAM(MI_PGM) PLAN(MI_PLAN)
+/*`},
+  {code:'SQLCODE -952',name:'Tablespace lleno',severity:'error',cat:'system',desc:'El tablespace no tiene espacio disponible para completar la operación.',causes:["Tablespace con MAXPAGES o límite de storage alcanzado","Dataset lleno sin extensión automática","Crecimiento inesperado de datos"],solutions:["Extender el tablespace con ALTER TABLESPACE","Añadir datasets al tablespace","Purgar datos históricos para liberar espacio"],example:`-- Ver uso de espacio
+SELECT TBSPACE, TOTALEXTENTS, USEDEXTENTS
+FROM SYSCAT.TABLESPACES
+WHERE TBSPACE = 'MI_TABLESPACE';
+
+-- z/OS: ampliar MAXPAGES
+ALTER TABLESPACE mi_bd.mi_ts MAXPAGES 50000;`},
+  {code:'SQLCODE -964',name:'Log de transacciones lleno',severity:'error',cat:'system',desc:'El log de transacciones activo está lleno. DB2 no puede registrar más cambios.',causes:["Transacción muy larga sin COMMIT","Tamaño de log primario insuficiente","COMMIT no emitido en carga masiva"],solutions:["Emitir COMMIT con más frecuencia","Aumentar tamaño del log primario y secundario"],example:`/* Configuración de logs en DB2 LUW */
+UPDATE DATABASE CONFIGURATION FOR mi_bd
+  USING LOGFILSIZ 8192
+        LOGPRIMARY 20
+        LOGSECOND  10;
+
+/* En cargas masivas: COMMIT cada 1000 filas */`},
+  {code:'SQLCODE -968',name:'Sistema de archivos / tablespace offline',severity:'error',cat:'system',desc:'El sistema de archivos o tablespace no tiene espacio o está fuera de línea.',causes:["Disco o volumen DASD lleno en z/OS","Sistema de archivos del servidor sin espacio","Tablespace OFFLINE o en estado de error"],solutions:["Liberar espacio eliminando ficheros históricos","Ampliar el volumen o añadir almacenamiento","En z/OS: -START DATABASE para poner tablespace en línea"],example:`/* Diagnóstico z/OS */
+D SMS,VOL=(*),STORGRP=(MI_GRUPO)
+
+/* Poner tablespace en línea */
+-START DATABASE(MI_BD) SPACENAM(MI_TS)`},
+  {code:'SQLCODE -1001',name:'DELETE de fila inexistente',severity:'error',cat:'data',desc:'Cuando se hace DELETE de una tabla y la fila no existe.',causes:["La clave del WHERE no identifica ninguna fila","Fila ya eliminada por otro proceso","Clave incorrecta en la variable host del DELETE"],solutions:["Verificar existencia con SELECT antes del DELETE","Controlar el caso de 0 filas eliminadas"],example:`SELECT COUNT(*) INTO :WS-CNT
+FROM tabla WHERE id = :WS-ID;
+
+IF WS-CNT > 0
+  DELETE FROM tabla WHERE id = :WS-ID
+ELSE
+  PERFORM FILA-NO-EXISTE
+END-IF.`},
+  {code:'SQLCODE -1010',name:'Cursor no abierto / longitud segmento IMS / MICROFOCUS sin memoria',severity:'error',cat:'cursor',desc:'Actualización o lectura de cursor no abierto. También por longitud de segmento IMS incorrecta, cursor definido pero no usado, o falta de memoria en MICROFOCUS.',causes:["Acceso DLI previo con longitud de segmento mal (machaca datos)","Cursor definido en DECLARE pero no se usa","MICROFOCUS con falta de memoria","Intento de leer cursor cerrado o no abierto"],solutions:["Verificar longitud del segmento IMS en la llamada DLI","Eliminar CURSORs declarados que no se usan","En MICROFOCUS: editar el .BAT del programa: borrar línea XM+JXM y poner XDBRES APS2XDB"],example:`/* MICROFOCUS: editar el .BAT del programa */
+/* Borrar: XM + JXM ...           */
+/* Poner:  XDBRES APS2XDB         */
+/* Añadir: AFLUSH XDBFLUSH        */`},
+  {code:'SQLCODE -1024',name:'Fichero .IDX no copiado / DELETE sin lectura previa',severity:'error',cat:'data',desc:'Se copió el fichero .TAB sin haber copiado el .IDX, o se creó tabla/índice nuevos sin sincronizar. También al intentar DELETE sin haber leído previamente.',causes:["Fichero .TAB copiado sin copiar el fichero .IDX","Tabla o índice nuevo creado sin actualizar el .IDX","DELETE intentado sin FETCH/SELECT previo en MICROFOCUS"],solutions:["Borrar la tabla y volverla a crear y cargar","Asegurar que .TAB y .IDX se copian juntos","Siempre leer antes de hacer DELETE"],example:`/* Solución: Borrar y recrear la tabla */
+DROP TABLE mi_tabla;
+CREATE TABLE mi_tabla (...);
+/* Recargar los datos */
+LOAD FROM datos.del OF DEL
+  INSERT INTO mi_tabla;`},
+  {code:'SQLCODE -1033',name:'Recuperas dos veces el mismo campo',severity:'error',cat:'syntax',desc:'Se recupera dos veces el mismo campo en la misma sentencia SELECT.',causes:["Columna repetida en la lista del SELECT","Error de copia en la sentencia SQL"],solutions:["Eliminar la columna duplicada del SELECT","Listar explícitamente las columnas necesarias"],example:`-- INCORRECTO: id aparece dos veces
+-- SELECT id, nombre, id FROM empleados
+
+-- CORRECTO
+SELECT id, nombre, salario
+FROM empleados
+WHERE activo = 'S';`},
+  {code:'SQLCODE -1034',name:"Fichero .IDX no sincronizado / falta ':' en WHERE",severity:'error',cat:'data',desc:"Fichero .IDX desincronizado. También al faltar los ':' que preceden a los campos de la WORKING en la WHERE del SELECT.",causes:["Fichero .IDX desincronizado con el .TAB","Falta de ':' delante de variables host en la WHERE"],solutions:["Borrar la tabla, volverla a crear y cargar","Añadir ':' delante de todas las variables host en el SQL"],example:`* Todas las variables host necesitan ':'
+EXEC SQL
+  SELECT id, nombre
+  INTO :WS-ID,       -- ':' obligatorio
+       :WS-NOMBRE    -- ':' obligatorio
+  FROM empleados
+  WHERE id = :WS-ID  -- ':' obligatorio
+END-EXEC.`},
+  {code:'SQLCODE -1045',name:'MICROFOCUS: campo de registro en formato incorrecto',severity:'error',cat:'data',desc:'En MICROFOCUS, un campo del registro (fichero real) no está en el formato que le corresponde al compararlo con la tabla DB2.',causes:["Campo de fichero real con formato incompatible al comparar con tabla DB2","Tipo de dato diferente entre el fichero COBOL y la definición de la tabla"],solutions:["Verificar el formato del campo en el fichero real vs la tabla DB2","Convertir el campo al tipo correcto antes de la comparación o INSERT"],example:`* Verificar compatibilidad de tipos
+* Fichero: PIC 9(8)  (YYYYMMDD sin guiones)
+* Tabla DB2: DATE (YYYY-MM-DD)
+
+* Convertir antes de usar en SQL:
+MOVE WS-FECHA-FICH(1:4) TO WS-FECHA-DB2(1:4).
+MOVE '-' TO WS-FECHA-DB2(5:1).
+MOVE WS-FECHA-FICH(5:2) TO WS-FECHA-DB2(6:2).`},
+  {code:'SQLCODE -1070',name:'Campos en ORDER BY que no existen en SELECT',severity:'error',cat:'syntax',desc:'Campos en la cláusula ORDER BY que no existen en la SELECT del CURSOR.',causes:["Columna en ORDER BY que no aparece en el SELECT","Alias mal escrito en ORDER BY"],solutions:["Añadir la columna del ORDER BY al SELECT","Usar el nombre o alias exacto de la columna"],example:`-- Añadir columna al SELECT si se usa en ORDER BY
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, nombre, fecha_alta  -- debe incluir fecha_alta
+  FROM empleados
+  ORDER BY fecha_alta              -- OK: esta en SELECT
+END-EXEC.`},
+  {code:'SQLCODE -1084',name:'Error en sentencia UPDATE / mal escrito en DB2',severity:'error',cat:'syntax',desc:'Falta la tabla o la coma de separación entre campos en el UPDATE. También errores de escritura en la sentencia DB2.',causes:["Falta el nombre de la tabla o la coma entre campos en el UPDATE","Campos de trabajo sin ':' delante en la sentencia SQL"],solutions:["Verificar la sintaxis completa del UPDATE","Añadir ':' delante de todas las variables host"],example:`* Sintaxis correcta del UPDATE
+EXEC SQL
+  UPDATE empleados
+  SET salario = :WS-SALARIO,   -- ':' y coma
+      activo  = :WS-ACTIVO     -- ':' sin coma en el ultimo
+  WHERE id = :WS-ID
+END-EXEC.`},
+  {code:'SQLCODE -1100',name:'Error al cerrar cursor tras llamar a módulo DB2',severity:'error',cat:'cursor',desc:'Error al cerrar un cursor después de haber llamado a un módulo que también es DB2. Al llamar al módulo, se cierran los cursores abiertos.',causes:["Módulo llamado que también usa DB2 cierra automáticamente los cursores del módulo llamante"],solutions:["Reestructurar la lógica para abrir y cerrar cursores en el mismo módulo","Evitar llamar a módulos DB2 mientras hay cursores abiertos"],example:`* Evitar esta situación:
+* OPEN C1 (en módulo A)
+* CALL MODULO-B (que también usa DB2)
+* => C1 puede quedar cerrado
+
+* Solución: abrir/cerrar en el mismo módulo
+* O bien: no llamar a módulos DB2 con cursores abiertos`},
+  {code:'SQLCODE -1117',name:'COPY no corresponde con CREATE',severity:'error',cat:'data',desc:'La COPY no corresponde con el CREATE TABLE: hay diferencias entre la estructura COBOL y la definición de la tabla.',causes:["COPY desactualizada respecto al CREATE TABLE actual","Columnas modificadas en la tabla sin actualizar la COPY"],solutions:["Regenerar la COPY con DCLGEN","Recompilar y rebindear tras actualizar la COPY"],example:`/* Regenerar COPY con DCLGEN */
+DCLGEN TABLE(MI_SCHEMA.MI_TABLA)
+        LIBRARY(MI_LIB(MI_COPIA))
+        ACTION(REPLACE)
+        LANGUAGE(COBOL)`},
+  {code:'SQLCODE -1185',name:'UPDATE de cursor con ORDER BY',severity:'error',cat:'cursor',desc:'Se intenta actualizar un cursor que ya tiene ORDER BY, lo cual no está permitido.',causes:["Cursor declarado con ORDER BY y también con FOR UPDATE OF","Combinación de ordenación y actualización posicionada"],solutions:["Eliminar el ORDER BY si el cursor es para actualización","Usar UPDATE estático por clave primaria obtenida del FETCH"],example:`* CORRECTO para actualizar: sin ORDER BY
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT id, salario FROM empleados
+  WHERE dept = :WS-DEPT
+  FOR UPDATE OF salario  -- sin ORDER BY
+END-EXEC.`},
+  {code:'SQLCODE -1204',name:'INSERT con valores extraños o tabla inexistente',severity:'error',cat:'data',desc:'Al insertar valores extraños (HIGH-VALUES, LOW-VALUES) o intentar insertar en una tabla que no existe.',causes:["Valores HIGH-VALUES o LOW-VALUES en campos clave del INSERT","Tabla referenciada inexistente","Variables no inicializadas con valores binarios extremos"],solutions:["Inicializar correctamente todas las variables antes del INSERT","Verificar existencia de la tabla","Evitar HIGH-VALUES y LOW-VALUES en campos de base de datos"],example:`* COBOL: inicializar variables correctamente
+INITIALIZE WS-TABLA-RECORD.
+
+* Verificar que no hay valores extremos
+IF WS-TAB-ID = LOW-VALUES OR
+   WS-TAB-ID = HIGH-VALUES
+  PERFORM ERROR-INICIALIZACION
+END-IF.`},
+  {code:'SQLCODE -1206',name:'MICROFOCUS: UPDATE con campo de otra tabla',severity:'error',cat:'syntax',desc:'En MICROFOCUS, en un UPDATE había un campo que no era de esa tabla.',causes:["UPDATE que referencia una columna que no pertenece a la tabla actualizada","Nombre de columna de otra tabla usado en el SET del UPDATE"],solutions:["Verificar que todos los campos del SET pertenecen a la tabla del UPDATE","Revisar los nombres de columna con SYSCAT.COLUMNS"],example:`-- Ver columnas de la tabla
+SELECT COLNAME FROM SYSCAT.COLUMNS
+WHERE TABNAME='MI_TABLA'
+ORDER BY COLNO;
+
+EXEC SQL
+  UPDATE mi_tabla
+  SET col1 = :WS-VAL1,  -- columnas de mi_tabla
+      col2 = :WS-VAL2
+  WHERE id = :WS-ID
+END-EXEC.`},
+  {code:'SQLCODE -1207',name:'UPDATE sin haber leído antes (FETCH)',severity:'error',cat:'cursor',desc:'Actualización (UPDATE) posicionada sin haber leído antes con FETCH.',causes:["UPDATE WHERE CURRENT OF sin FETCH previo","OPEN seguido directamente de UPDATE sin FETCH"],solutions:["Siempre hacer FETCH después de OPEN antes de UPDATE posicionado","La secuencia correcta es: OPEN -> FETCH -> UPDATE/DELETE -> CLOSE"],example:`EXEC SQL OPEN C1 END-EXEC.
+EXEC SQL FETCH C1 INTO :WS-ID,:WS-SAL END-EXEC.
+IF SQLCODE = 0
+  COMPUTE WS-NSAL = WS-SAL * 1.10
+  EXEC SQL
+    UPDATE emp SET salario=:WS-NSAL
+    WHERE CURRENT OF C1
+  END-EXEC
+END-IF.`},
+  {code:'SQLCODE -1405',name:'INSERT con valor nulo en columna NOT NULL',severity:'error',cat:'data',desc:'Al hacer un INSERT con un valor nulo en columna NOT NULL.',causes:["Campo obligatorio con valor nulo en el INSERT","Variable indicadora negativa en columna NOT NULL"],solutions:["Proporcionar valor no nulo para las columnas NOT NULL","Verificar los indicadores de variable antes del INSERT"],example:`* Verificar valores antes del INSERT
+IF WS-ID-IND < 0
+  MOVE 0 TO WS-ID
+END-IF.
+IF WS-NOMBRE-IND < 0
+  MOVE 'DESCONOCIDO' TO WS-NOMBRE
+END-IF.
+
+EXEC SQL
+  INSERT INTO tabla (id, nombre)
+  VALUES (:WS-ID, :WS-NOMBRE)
+END-EXEC.`},
+  {code:'SQLCODE -1407',name:'UPDATE con valor nulo en columna NOT NULL',severity:'error',cat:'data',desc:'Al hacer un UPDATE con un valor nulo en columna NOT NULL.',causes:["Valor nulo en variable del SET para columna NOT NULL","Indicador de variable negativo para columna NOT NULL del UPDATE"],solutions:["Verificar que los valores del SET no son nulos para columnas NOT NULL","Usar COALESCE para proporcionar valor por defecto"],example:`* Verificar antes de UPDATE
+IF WS-SALARIO-IND < 0
+  MOVE 0 TO WS-SALARIO
+END-IF.
+
+EXEC SQL
+  UPDATE empleados
+  SET salario = :WS-SALARIO
+  WHERE id = :WS-ID
+END-EXEC.`},
+  {code:'SQLCODE -1408',name:'MICROFOCUS: campo TIMESTAMP con LOW-VALUES / INSERT sin campo TIMESTAMP',severity:'error',cat:'data',desc:'En MICROFOCUS, tabla DB2 con campo TIMESTAMP da problemas al mover LOW-VALUES, o al insertar la tabla cuyo INSERT no debe llevar VALUE de ese campo.',causes:["Mover LOW-VALUES a campo TIMESTAMP y luego usar en consulta","INSERT que incluye el campo TIMESTAMP en el INTO (no debe incluirse)"],solutions:["No mover LOW-VALUES a campos TIMESTAMP","En el INSERT, no incluir el campo TIMESTAMP en la lista INTO ni en VALUES"],example:`-- INSERT correcto: NO incluir TIMESTAMP
+INSERT INTO mi_tabla (id, nombre, descripcion)
+  -- NO incluir el campo TIMESTAMP aqui
+VALUES (:WS-ID, :WS-NOM, :WS-DESC);
+
+-- DB2 pondrá automaticamente el TIMESTAMP
+-- si esta definido como DEFAULT CURRENT TIMESTAMP`},
+  {code:'SQLCODE -1451',name:'MICROFOCUS: campo TIMESTAMP con LOW-VALUES (variante)',severity:'error',cat:'data',desc:'Variante del -1408 en MICROFOCUS: campo TIMESTAMP con LOW-VALUES en consulta o INSERT que incluye el campo TIMESTAMP incorrectamente.',causes:["Campo TIMESTAMP con LOW-VALUES en consulta SELECT","INSERT que incluye el campo TIMESTAMP en la lista de columnas"],solutions:["No usar LOW-VALUES en campos TIMESTAMP","En el INTO del INSERT, no nombrar el campo TIMESTAMP","Definir TIMESTAMP como DEFAULT CURRENT TIMESTAMP"],example:`-- Definir TIMESTAMP con DEFAULT
+CREATE TABLE mi_tabla (
+  id        INTEGER NOT NULL,
+  nombre    VARCHAR(50) NOT NULL,
+  ts_insert TIMESTAMP DEFAULT CURRENT TIMESTAMP
+);
+
+-- INSERT sin incluir el TIMESTAMP
+INSERT INTO mi_tabla (id, nombre)
+VALUES (:WS-ID, :WS-NOM);`},
+  {code:'SQLCODE -1616',name:'DELETE de tabla con dependientes / USERNAME NOT UNIQUE en CURSOR',severity:'error',cat:'integrity',desc:'Al intentar hacer DELETE de una tabla que tiene tablas dependientes sin haber borrado antes. También si en COBOL el OPEN del CURSOR da USERNAME NOT UNIQUE porque en el DECLARE hay nombres de campos de más de una tabla sin referenciar.',causes:["DELETE en tabla padre con tablas hijas que tienen filas dependientes","DECLARE CURSOR con nombres de campos de más de una tabla sin cualificación (MICROFOCUS)"],solutions:["Borrar primero las filas de las tablas hijas, luego del padre","En el DECLARE, cualificar los campos con alias de tabla para evitar ambigüedad"],example:`-- Orden correcto de borrado
+DELETE FROM tabla_hija WHERE padre_id = :WS-ID;
+DELETE FROM tabla_padre WHERE id = :WS-ID;
+
+-- DECLARE con campos cualificados
+EXEC SQL DECLARE C1 CURSOR FOR
+  SELECT e.id, e.nombre, d.nombre AS dept_nom
+  FROM empleados e JOIN departamentos d
+    ON e.dept_id = d.id
+END-EXEC.`},
+];
+
+// ── Helpers ──────────────────────────────────────────────────────────────
+const SEV_LABEL = {success:'Éxito',warning:'Aviso',error:'Error'};
+const CAT_LABEL = {system:'Sistema',syntax:'Sintaxis',data:'Datos',cursor:'Cursor',integrity:'Integridad',auth:'Autorización',object:'Objetos'};
+const CAT_COLOR = {system:'#94a3b8',syntax:'#3b82f6',data:'#f472b6',cursor:'#2dd4bf',integrity:'#f97316',auth:'#a78bfa',object:'#fb923c'};
+
+let activeFilter = 'all';
+
+function sevClass(s){return s==='success'?'sev-ok':s==='warning'?'sev-warn':'sev-error';}
+
+function updateCounts(visible){
+  const all = CODES.length;
+  document.getElementById('cnt-all').textContent = all;
+  ['success','warning','error'].forEach(s=>document.getElementById('cnt-'+s).textContent=CODES.filter(c=>c.severity===s).length);
+  ['system','syntax','data','cursor','integrity','auth','object'].forEach(c=>document.getElementById('cnt-'+c).textContent=CODES.filter(x=>x.cat===c).length);
+  document.getElementById('header-stats').textContent = `${visible} / ${all} códigos`;
+}
+
+function applyFilters(){
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const area = document.getElementById('results-area');
+  const noRes = document.getElementById('no-results');
+
+  let filtered = CODES.filter(c=>{
+    const matchFilter = activeFilter==='all'||c.severity===activeFilter||c.cat===activeFilter;
+    const matchSearch = !q||c.code.toLowerCase().includes(q)||c.name.toLowerCase().includes(q)||c.desc.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+
+  updateCounts(filtered.length);
+
+  if(filtered.length===0){area.innerHTML='';noRes.style.display='block';return;}
+  noRes.style.display='none';
+
+  // Group by severity
+  const groups = [
+    {key:'success',label:'Éxito / Aviso positivo',items:filtered.filter(c=>c.severity==='success')},
+    {key:'warning',label:'Avisos (sin datos / fin de cursor)',items:filtered.filter(c=>c.severity==='warning')},
+    {key:'error',label:'Errores',items:filtered.filter(c=>c.severity==='error')},
+  ].filter(g=>g.items.length>0);
+
+  area.innerHTML = groups.map(g=>`
+    <div class="group">
+      <div class="section-header">
+        <span class="section-title">${g.label}</span>
+        <span class="section-count">${g.items.length} código${g.items.length!==1?'s':''}</span>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>SQLCODE</th><th>Nombre</th><th>Descripción</th><th>Cat.</th><th></th>
+          </tr></thead>
+          <tbody>
+            ${g.items.map((c,i)=>`
+              <tr onclick="openModal(${CODES.indexOf(c)})">
+                <td class="td-code">
+                  <span class="sev ${sevClass(c.severity)}">${c.code}</span>
+                </td>
+                <td class="td-name">${c.name}</td>
+                <td class="td-desc">${c.desc.length>100?c.desc.slice(0,97)+'…':c.desc}</td>
+                <td><span style="font-size:11px;color:${CAT_COLOR[c.cat]}">${CAT_LABEL[c.cat]||c.cat}</span></td>
+                <td class="td-action"><span>Ver →</span></td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`).join('');
+}
+
+function setFilter(f, btn){
+  activeFilter = f;
+  document.querySelectorAll('.aside-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function openModal(idx){
+  const c = CODES[idx];
+  document.getElementById('m-code').textContent = c.code;
+  document.getElementById('m-name').textContent = c.name;
+  const sevEl = document.getElementById('m-sev');
+  sevEl.textContent = SEV_LABEL[c.severity]||c.severity;
+  sevEl.className = 'sev ' + sevClass(c.severity);
+  document.getElementById('m-type').textContent = SEV_LABEL[c.severity]||c.severity;
+  document.getElementById('m-cat').textContent = CAT_LABEL[c.cat]||c.cat;
+  document.getElementById('m-desc').textContent = c.desc;
+  document.getElementById('m-causes').innerHTML = c.causes.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('m-solutions').innerHTML = c.solutions.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('m-example').textContent = c.example;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(){
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeOverlay(e){
+  if(e.target===document.getElementById('overlay')) closeModal();
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
+
+// Init
+applyFilters();
+</script>
+</body>
+</html>
