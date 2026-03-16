@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto — SQLCode.es</title>
+<meta name="description" content="Contacta con SQLCode.es para sugerencias, correcciones o colaboraciones sobre la referencia DB2 SQLCODE.">
+<link rel="canonical" href="https://www.sqlcode.es/contacto.html">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0d11;--bg2:#111318;--bg3:#181b22;--bg4:#1e2230;--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);--text:#dde2ed;--text2:#7f8a9e;--text3:#3e4557;--accent:#3b82f6;--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif;--radius:10px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;line-height:1.6;}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh;}
+header{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 2rem;position:sticky;top:0;z-index:100;}
+.header-inner{max-width:900px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.brand-icon{width:32px;height:32px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:600;color:white;flex-shrink:0;}
+.brand-name{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--text);}
+.brand-name span{color:var(--accent);}
+nav{display:flex;gap:4px;}
+.nav-link{font-family:var(--mono);font-size:12px;color:var(--text2);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all 0.15s;}
+.nav-link:hover{background:var(--bg3);color:var(--text);}
+.nav-link.active{background:var(--bg4);color:var(--text);}
+.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:3rem 2rem;}
+.hero-inner{max-width:900px;margin:0 auto;}
+h1{font-family:var(--mono);font-size:clamp(24px,4vw,38px);font-weight:600;letter-spacing:-0.03em;margin-bottom:8px;}
+h1 em{font-style:normal;color:var(--accent);}
+.hero-sub{font-size:16px;color:var(--text2);}
+.content-wrap{max-width:900px;margin:0 auto;padding:3rem 2rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.content-wrap.single{grid-template-columns:1fr;}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:2.5rem;}
+.card-title{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text3);margin-bottom:1.5rem;}
+.contact-item{display:flex;align-items:center;gap:1rem;padding:1.2rem;background:var(--bg3);border:1px solid var(--border);border-radius:10px;margin-bottom:1rem;text-decoration:none;transition:all 0.2s;}
+.contact-item:hover{border-color:var(--accent);background:var(--bg4);}
+.contact-icon{width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.contact-icon.email{background:rgba(59,130,246,0.15);}
+.contact-text strong{display:block;font-family:var(--mono);font-size:13px;color:var(--text);margin-bottom:2px;}
+.contact-text span{font-size:13px;color:var(--text2);}
+.prose{font-size:15px;color:var(--text2);line-height:1.8;}
+.prose p{margin-bottom:1.2rem;}
+.prose p:last-child{margin-bottom:0;}
+.prose strong{color:var(--text);}
+.topic-list{list-style:none;margin-top:1rem;}
+.topic-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text2);padding:8px 0;border-bottom:1px solid var(--border);}
+.topic-list li:last-child{border-bottom:none;}
+.topic-list li::before{content:"▸";color:var(--accent);flex-shrink:0;margin-top:2px;}
+.response-time{display:flex;align-items:center;gap:10px;background:rgba(0,212,74,0.05);border:1px solid rgba(0,212,74,0.15);border-radius:8px;padding:1rem 1.2rem;margin-top:1.5rem;}
+.dot-green{width:8px;height:8px;border-radius:50%;background:#00d44a;box-shadow:0 0 6px rgba(0,212,74,0.6);flex-shrink:0;}
+.response-time span{font-size:13px;color:var(--text2);}
+footer{border-top:1px solid var(--border);padding:1.2rem 2rem;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text3);position:relative;z-index:1;}
+.footer-links{display:flex;justify-content:center;gap:1.5rem;margin-top:8px;}
+.footer-links a{color:var(--text3);text-decoration:none;font-size:11px;transition:color 0.15s;}
+.footer-links a:hover{color:var(--accent);}
+@media(max-width:680px){.content-wrap{grid-template-columns:1fr;}.nav-link{font-size:11px;padding:6px 8px;}}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-icon">DB2</div>
+      <div class="brand-name"><span>DB2</span>Codes</div>
+    </a>
+    <nav>
+      <a class="nav-link" href="index.html">Referencia</a>
+      <a class="nav-link" href="quienes-somos.html">Quiénes somos</a>
+      <a class="nav-link active" href="contacto.html">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1><em>Contacto</em></h1>
+    <p class="hero-sub">¿Tienes una pregunta, corrección o sugerencia? Escríbeme.</p>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <div class="card">
+    <div class="card-title">Cómo contactar</div>
+
+    <a class="contact-item" href="mailto:info@sqlcode.es">
+      <div class="contact-icon email">✉️</div>
+      <div class="contact-text">
+        <strong>info@sqlcode.es</strong>
+        <span>Email directo — respondo en menos de 48h</span>
+      </div>
+    </a>
+
+    <div class="response-time">
+      <div class="dot-green"></div>
+      <span>Tiempo de respuesta habitual: <strong style="color:var(--text);">menos de 48 horas</strong> en días laborables.</span>
+    </div>
+
+    <div class="prose" style="margin-top:1.5rem;">
+      <p>
+        Puedes escribirme para cualquier consulta relacionada con el contenido de la web. Intentaré responder con la mayor brevedad posible.
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">¿Sobre qué puedo ayudarte?</div>
+    <ul class="topic-list">
+      <li>Corrección de un SQLCODE documentado incorrectamente</li>
+      <li>Sugerencia de nuevo código no incluido en la referencia</li>
+      <li>Ampliación de la descripción o ejemplos de un código</li>
+      <li>Consulta técnica sobre error DB2 en producción</li>
+      <li>Colaboración o aportación de contenido técnico</li>
+      <li>Reportar un problema técnico con la web</li>
+      <li>Consultas sobre publicidad o patrocinios</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  DB2 SQLCODEs — Referencia Completa de Producción · sqlcode.es
+  <div class="footer-links">
+    <a href="index.html">Referencia</a>
+    <a href="quienes-somos.html">Quiénes somos</a>
+    <a href="contacto.html">Contacto</a>
+    <a href="privacidad.html">Privacidad</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>

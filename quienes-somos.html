@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiénes somos — SQLCode.es</title>
+<meta name="description" content="Conoce al profesional detrás de SQLCode.es, la referencia más completa de SQLCODEs DB2 en español e inglés.">
+<link rel="canonical" href="https://www.sqlcode.es/quienes-somos.html">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0d11;--bg2:#111318;--bg3:#181b22;--bg4:#1e2230;--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);--text:#dde2ed;--text2:#7f8a9e;--text3:#3e4557;--accent:#3b82f6;--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif;--radius:10px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;line-height:1.6;}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh;}
+header{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 2rem;position:sticky;top:0;z-index:100;}
+.header-inner{max-width:900px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.brand-icon{width:32px;height:32px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:600;color:white;flex-shrink:0;}
+.brand-name{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--text);}
+.brand-name span{color:var(--accent);}
+nav{display:flex;gap:4px;}
+.nav-link{font-family:var(--mono);font-size:12px;color:var(--text2);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all 0.15s;}
+.nav-link:hover{background:var(--bg3);color:var(--text);}
+.nav-link.active{background:var(--bg4);color:var(--text);}
+.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:3rem 2rem;}
+.hero-inner{max-width:900px;margin:0 auto;}
+h1{font-family:var(--mono);font-size:clamp(24px,4vw,38px);font-weight:600;letter-spacing:-0.03em;margin-bottom:8px;}
+h1 em{font-style:normal;color:var(--accent);}
+.hero-sub{font-size:16px;color:var(--text2);}
+.content-wrap{max-width:900px;margin:0 auto;padding:3rem 2rem 5rem;}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:2.5rem;margin-bottom:2rem;}
+.card-title{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text3);margin-bottom:1.5rem;}
+.profile-row{display:flex;gap:2rem;align-items:flex-start;margin-bottom:2rem;}
+.profile-avatar{width:80px;height:80px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#1d4ed8);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:28px;font-weight:700;color:white;flex-shrink:0;font-style:normal;}
+.profile-info h2{font-family:var(--mono);font-size:20px;font-weight:600;margin-bottom:4px;color:var(--text);}
+.profile-info .role{font-size:14px;color:var(--accent);font-family:var(--mono);margin-bottom:8px;}
+.profile-info p{font-size:15px;color:var(--text2);line-height:1.7;}
+.prose{font-size:15px;color:var(--text2);line-height:1.8;}
+.prose p{margin-bottom:1.2rem;}
+.prose p:last-child{margin-bottom:0;}
+.prose strong{color:var(--text);font-weight:600;}
+.tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.5rem;}
+.tag{font-family:var(--mono);font-size:11px;padding:4px 12px;border-radius:20px;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);}
+.tag.accent{background:rgba(59,130,246,0.1);border-color:rgba(59,130,246,0.3);color:#93c5fd;}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;}
+.stat-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center;}
+.stat-num{font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:600;color:#00d44a;text-shadow:0 0 8px rgba(0,212,74,0.4);display:block;margin-bottom:4px;}
+.stat-label{font-size:12px;color:var(--text3);}
+.divider{border:none;border-top:1px solid var(--border);margin:2rem 0;}
+footer{border-top:1px solid var(--border);padding:1.2rem 2rem;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text3);position:relative;z-index:1;}
+.footer-links{display:flex;justify-content:center;gap:1.5rem;margin-top:8px;}
+.footer-links a{color:var(--text3);text-decoration:none;font-size:11px;transition:color 0.15s;}
+.footer-links a:hover{color:var(--accent);}
+@media(max-width:640px){.profile-row{flex-direction:column;}.stats-grid{grid-template-columns:1fr 1fr;}.header-inner{padding:0;}.nav-link{font-size:11px;padding:6px 8px;}}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-icon">DB2</div>
+      <div class="brand-name"><span>DB2</span>Codes</div>
+    </a>
+    <nav>
+      <a class="nav-link" href="index.html">Referencia</a>
+      <a class="nav-link active" href="quienes-somos.html">Quiénes somos</a>
+      <a class="nav-link" href="contacto.html">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1>Quiénes <em>somos</em></h1>
+    <p class="hero-sub">El profesional detrás de SQLCode.es</p>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <div class="card">
+    <div class="card-title">Perfil</div>
+    <div class="profile-row">
+      <div class="profile-avatar">R</div>
+      <div class="profile-info">
+        <h2>Raúl</h2>
+        <div class="role">Desarrollador COBOL / DB2 · Mainframe</div>
+        <p>Profesional con amplia experiencia en el desarrollo y mantenimiento de sistemas mainframe, especializado en COBOL embebido con DB2 en entornos de banca y seguros.</p>
+      </div>
+    </div>
+    <div class="prose">
+      <p>
+        SQLCode.es nació de una necesidad real: tener a mano una referencia rápida, completa y en español de los códigos de error DB2 que aparecen en el día a día trabajando con sistemas mainframe. La documentación oficial de IBM es exhaustiva pero poco ágil para consultas rápidas en producción.
+      </p>
+      <p>
+        Con años de experiencia resolviendo errores SQLCODE en entornos COBOL/DB2, he recopilado y documentado más de <strong>500 códigos</strong> con descripción detallada, causas más habituales, cómo solucionarlos y ejemplos reales de código SQL y COBOL. Todo disponible en español e inglés.
+      </p>
+      <p>
+        El objetivo de este sitio es ser la referencia más útil y completa para desarrolladores mainframe de habla hispana, y también para cualquier profesional DB2 que prefiera consultar en inglés.
+      </p>
+    </div>
+    <div class="tag-list">
+      <span class="tag accent">COBOL</span>
+      <span class="tag accent">DB2</span>
+      <span class="tag accent">z/OS</span>
+      <span class="tag accent">JCL</span>
+      <span class="tag">Mainframe</span>
+      <span class="tag">SQL</span>
+      <span class="tag">CICS</span>
+      <span class="tag">IMS</span>
+      <span class="tag">SPUFI</span>
+      <span class="tag">BIND / REBIND</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">El proyecto en números</div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <span class="stat-num">+500</span>
+        <span class="stat-label">SQLCODEs documentados</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Idiomas (ES / EN)</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">7</span>
+        <span class="stat-label">Categorías de error</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">¿Por qué SQLCode.es?</div>
+    <div class="prose">
+      <p>
+        En el mundo mainframe, cuando un programa falla con un <strong>SQLCODE -904</strong> o un <strong>-818</strong> en producción, cada minuto cuenta. Buscar en la documentación oficial, entre mensajes en inglés técnico y sin ejemplos prácticos, no es lo más eficiente.
+      </p>
+      <p>
+        SQLCode.es está pensado para ser consultado directamente desde el puesto de trabajo: <strong>buscador instantáneo</strong>, explicaciones en español e inglés, causas habituales y pasos concretos para resolver el problema. Sin rodeos.
+      </p>
+      <p>
+        Si encuentras algún error en la documentación, tienes sugerencias de mejora o quieres que añada algún código específico, no dudes en <a href="contacto.html" style="color:var(--accent);">contactarme</a>.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  DB2 SQLCODEs — Referencia Completa de Producción · sqlcode.es
+  <div class="footer-links">
+    <a href="index.html">Referencia</a>
+    <a href="quienes-somos.html">Quiénes somos</a>
+    <a href="contacto.html">Contacto</a>
+    <a href="privacidad.html">Privacidad</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
